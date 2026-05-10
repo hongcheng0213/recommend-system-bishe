@@ -1,0 +1,83 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="com.example.recommend.model.Tutor" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>导师列表 - 导师推荐系统</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+    <style>.body-padding{padding-top:70px;padding-bottom:70px;}.footer{background:#f7f7f7;padding:12px 0;}</style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNav"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/student/home">导师推荐系统</a>
+        </div>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="nav navbar-nav">
+                <li><a href="${pageContext.request.contextPath}/student/home">首页</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/student/tutors">意向导师</a></li>
+                <li><a href="${pageContext.request.contextPath}/student/recommend">推荐结果</a></li>
+                <li><a href="${pageContext.request.contextPath}/student/tutorBrowse">导师浏览</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin">管理员</a></li>
+                <li><a href="${pageContext.request.contextPath}/logout">退出登录</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container body-padding">
+    <div class="row"><div class="col-md-12"><div class="page-header"><h3>导师列表</h3></div></div></div>
+    <div class="row"><div class="col-md-12">
+        <%
+           List<Tutor> tutors = (List<Tutor>) request.getAttribute("tutors");
+           Map ratingMap = (Map) request.getAttribute("ratingMap");
+           if (ratingMap == null) { ratingMap = new HashMap(); }
+        %>
+        <% if (tutors == null || tutors.isEmpty()) { %>
+            <div class="alert alert-warning">当前没有导师数据，请先在数据库中插入导师记录。</div>
+        <% } else { %>
+            <form method="post" action="${pageContext.request.contextPath}/student/rate">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead><tr><th>编号</th><th>姓名</th><th>学院</th><th>研究方向</th><th>招生名额</th><th>意向程度</th></tr></thead>
+                        <tbody>
+                        <% for (Tutor t : tutors) {
+                               Object r = ratingMap.get(t.getId());
+                               double selectedScore = (r instanceof Number) ? ((Number) r).doubleValue() : 3.0;
+                        %>
+                            <tr>
+                                <td><%= t.getId() %></td>
+                                <td><%= t.getName() %></td>
+                                <td><%= t.getDepartment() %></td>
+                                <td><%= t.getResearchFields() %></td>
+                                <td><%= t.getQuota() %></td>
+                                <td>
+                                    <select name="score_<%= t.getId() %>" class="form-control input-sm" style="width:80px; display:inline-block;">
+                                    <% for (int i = 1; i <= 5; i++) { %>
+                                        <option value="<%= i %>" <%= (int) selectedScore == i ? "selected" : "" %>><%= i %></option>
+                                    <% } %>
+                                    </select>
+                                </td>
+                            </tr>
+                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="submit" class="btn btn-success">保存所有评分</button>
+            </form>
+        <% } %>
+    </div></div>
+    <div class="text-right"><a class="btn btn-success" href="${pageContext.request.contextPath}/student/recommend">查看推荐结果</a></div>
+</div>
+<footer class="footer text-center">本科生-研究生导师推荐系统</footer>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+
