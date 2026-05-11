@@ -2,6 +2,7 @@ package com.example.recommend.web;
 
 import com.example.recommend.dao.StudentDAO;
 import com.example.recommend.model.Student;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +28,8 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        Student student = studentDAO.findByUsernameAndPassword(username, password);
-        if (student != null) {
+        Student student = studentDAO.findByName(username);
+        if (student != null && BCrypt.checkpw(password, student.getPasswordHash())) {
             HttpSession session = req.getSession();
             session.setAttribute("studentId", student.getId());
             session.setAttribute("studentName", student.getName());

@@ -54,7 +54,26 @@ public class TutorBrowseServlet extends HttpServlet {
 
         // 根据筛选条件获取导师列表
         List<Tutor> tutors = tutorDAO.findByFilter(university, department, keyword);
-        req.setAttribute("tutors", tutors);
+
+        // 分页
+        int page = 1;
+        int pageSize = 6;
+        try {
+            String pageStr = req.getParameter("page");
+            if (pageStr != null) page = Integer.parseInt(pageStr);
+        } catch (NumberFormatException ignored) {}
+        int total = tutors.size();
+        int totalPages = (int) Math.ceil((double) total / pageSize);
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+        int fromIndex = (page - 1) * pageSize;
+        int toIndex = Math.min(fromIndex + pageSize, total);
+        List<Tutor> pageTutors = total > 0 ? tutors.subList(fromIndex, toIndex) : tutors;
+
+        req.setAttribute("tutors", pageTutors);
+        req.setAttribute("currentPage", page);
+        req.setAttribute("totalPages", totalPages);
+        req.setAttribute("totalTutors", total);
 
         req.getRequestDispatcher("/tutorBrowse.jsp").forward(req, resp);
     }

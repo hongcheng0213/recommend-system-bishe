@@ -163,10 +163,40 @@
                     </div>
                 </div>
             </div>
-        <% 
-            }
-        } %>
+        <% } } %>
     </div>
+
+    <%-- 分页控件 --%>
+    <%
+        int currentPage = (Integer) request.getAttribute("currentPage");
+        int totalPages = (Integer) request.getAttribute("totalPages");
+        int totalTutors = (Integer) request.getAttribute("totalTutors");
+        if (totalPages > 1) {
+            String queryStr = "";
+            if (request.getParameter("university") != null)
+                queryStr += "&university=" + java.net.URLEncoder.encode(request.getParameter("university"), "UTF-8");
+            if (request.getParameter("department") != null)
+                queryStr += "&department=" + java.net.URLEncoder.encode(request.getParameter("department"), "UTF-8");
+            if (request.getParameter("keyword") != null)
+                queryStr += "&keyword=" + java.net.URLEncoder.encode(request.getParameter("keyword"), "UTF-8");
+    %>
+    <div class="text-center">
+        <ul class="pagination">
+            <li class="<%= currentPage <= 1 ? "disabled" : "" %>">
+                <a href="?page=<%= currentPage - 1 %><%= queryStr %>">&laquo;</a>
+            </li>
+            <% for (int p = 1; p <= totalPages; p++) { %>
+            <li class="<%= p == currentPage ? "active" : "" %>">
+                <a href="?page=<%= p %><%= queryStr %>"><%= p %></a>
+            </li>
+            <% } %>
+            <li class="<%= currentPage >= totalPages ? "disabled" : "" %>">
+                <a href="?page=<%= currentPage + 1 %><%= queryStr %>">&raquo;</a>
+            </li>
+        </ul>
+        <small class="text-muted">共 <%= totalTutors %> 位导师</small>
+    </div>
+    <% } %>
 </div>
 <footer class="footer text-center">本科生-研究生导师推荐系统</footer>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

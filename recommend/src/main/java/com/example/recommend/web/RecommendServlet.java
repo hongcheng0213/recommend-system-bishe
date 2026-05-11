@@ -28,6 +28,7 @@ public class RecommendServlet extends HttpServlet {
         }
         int studentId = (int) session.getAttribute("studentId");
         List<TutorScore> recommendations = recommendationService.recommendForStudent(studentId, 5);
+        recommendLogDAO.deleteByStudentId(studentId);
         if (recommendations != null) {
             for (TutorScore ts : recommendations) {
                 recommendLogDAO.insertLog(studentId, ts.getTutor().getId(), ts.getScore());

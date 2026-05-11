@@ -8,6 +8,7 @@ public class Student {
     private String grade;
     private String interests;
     private double score;
+    private String passwordHash;
 
     public int getId() {
         return id;
@@ -63,6 +64,14 @@ public class Student {
 
     public void setScore(double score) {
         this.score = score;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }
 

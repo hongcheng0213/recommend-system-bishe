@@ -2,10 +2,14 @@ package com.example.recommend.service;
 
 import com.example.recommend.dao.PreferenceDAO;
 import com.example.recommend.dao.StudentDAO;
+import com.example.recommend.dao.StudentExtDAO;
 import com.example.recommend.dao.TutorDAO;
+import com.example.recommend.dao.TutorExtDAO;
 import com.example.recommend.model.Student;
+import com.example.recommend.model.StudentExt;
 import com.example.recommend.model.StudentPreference;
 import com.example.recommend.model.Tutor;
+import com.example.recommend.model.TutorExt;
 import com.example.recommend.model.TutorScore;
 
 import java.util.*;
@@ -13,9 +17,18 @@ import java.util.stream.Collectors;
 
 public class RecommendationService {
 
+    // 权重常量
+    private static final double W_INTEREST = 1.5;
+    private static final double W_MAJOR = 2.0;
+    private static final double W_GPA = 2.0;
+    private static final double W_SCORE = 0.5;
+    private static final double W_HOT = 0.5;
+
     private final PreferenceDAO preferenceDAO = new PreferenceDAO();
     private final TutorDAO tutorDAO = new TutorDAO();
     private final StudentDAO studentDAO = new StudentDAO();
+    private final StudentExtDAO studentExtDAO = new StudentExtDAO();
+    private final TutorExtDAO tutorExtDAO = new TutorExtDAO();
 
     public List<TutorScore> recommendForStudent(int studentId, int topN) {
         Student target = studentDAO.findById(studentId);
@@ -118,31 +131,56 @@ public class RecommendationService {
     private List<TutorScore> contentBasedFallback(Student student, int topN) {
         List<Tutor> tutors = tutorDAO.findAll();
         List<TutorScore> list = new ArrayList<>();
-        String interests = student.getInterests() != null ? student.getInterests().toLowerCase() : "";
-        String major = student.getMajor() != null ? student.getMajor().toLowerCase() : "";
+
+        String interests = cleanStr(student.getInterests());
+        String major = cleanStr(student.getMajor());
+
+        StudentExt studentExt = studentExtDAO.findByStudentId(student.getId());
+        double gpa = studentExt != null ? studentExt.getGpa() : 2.0;
+        double studentScore = student.getScore();
 
         for (Tutor tutor : tutors) {
-            String fields = tutor.getResearchFields() != null ? tutor.getResearchFields().toLowerCase() : "";
-            String dept = tutor.getDepartment() != null ? tutor.getDepartment().toLowerCase() : "";
-            int match = 0;
-            if (!major.isEmpty() && dept.contains(major)) {
-                match += 2;
-            }
+            String fields = cleanStr(tutor.getResearchFields());
+            String dept = cleanStr(tutor.getDepartment());
+
+            double score = 0.0;
+
+            // 兴趣关键词匹配
             if (!interests.isEmpty()) {
                 String[] parts = interests.split("[,，;；\\s]+");
                 for (String p : parts) {
-                    if (!p.isEmpty() && fields.contains(p.toLowerCase())) {
-                        match += 3;
+                    if (!p.isEmpty() && fields.contains(p)) {
+                        score += W_INTEREST;
                     }
                 }
             }
-            double finalScore = match + student.getScore() * 0.1;
-            if (finalScore > 0) {
-                list.add(new TutorScore(tutor, finalScore, "基于专业、兴趣和成绩的内容匹配推荐"));
+
+            // 专业与院系匹配
+            if (!major.isEmpty() && dept.contains(major)) {
+                score += W_MAJOR;
+            }
+
+            // GPA 贡献 (0-4 → 0-2)
+            score += (gpa / 4.0) * W_GPA;
+
+            // 考研分数贡献 (0-500 → 0-0.5)
+            score += Math.min(studentScore / 500.0, 1.0) * W_SCORE;
+
+            // 导师热度贡献 (0-100 → 0-0.5)
+            double hotScore = tutor.getHotScore() > 0 ? tutor.getHotScore() : 50.0;
+            score += (hotScore / 100.0) * W_HOT;
+
+            if (score > 0) {
+                list.add(new TutorScore(tutor, score, "基于专业、兴趣、GPA和导师热度的内容匹配推荐"));
             }
         }
+
         Collections.sort(list);
         return list.stream().limit(topN).collect(Collectors.toList());
     }
-}
 
+    private static String cleanStr(String s) {
+        if (s == null) return "";
+        return s.replace("\r", "").replace("\n", "").trim();
+    }
+}

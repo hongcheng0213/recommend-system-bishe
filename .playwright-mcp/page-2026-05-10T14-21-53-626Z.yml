@@ -1,0 +1,97 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "导师推荐系统" [ref=e5] [cursor=pointer]:
+        - /url: /tutor-recommendation/student/home
+      - list [ref=e7]:
+        - listitem [ref=e8]:
+          - link "首页" [ref=e9] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/home
+        - listitem [ref=e10]:
+          - link "导师打分" [ref=e11] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/tutors
+        - listitem [ref=e12]:
+          - link "推荐结果" [ref=e13] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/recommend
+        - listitem [ref=e14]:
+          - link "导师浏览" [ref=e15] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/tutorBrowse
+        - listitem [ref=e16]:
+          - link "管理员" [ref=e17] [cursor=pointer]:
+            - /url: /tutor-recommendation/admin
+        - listitem [ref=e18]:
+          - link "退出登录" [ref=e19] [cursor=pointer]:
+            - /url: /tutor-recommendation/logout
+  - generic [ref=e20]:
+    - heading "推荐结果" [level=3] [ref=e22]
+    - table [ref=e24]:
+      - rowgroup [ref=e25]:
+        - row "排名 导师 职称 学院 研究方向 招生名额 研究成果 匹配分 推荐理由" [ref=e26]:
+          - columnheader "排名" [ref=e27]
+          - columnheader "导师" [ref=e28]
+          - columnheader "职称" [ref=e29]
+          - columnheader "学院" [ref=e30]
+          - columnheader "研究方向" [ref=e31]
+          - columnheader "招生名额" [ref=e32]
+          - columnheader "研究成果" [ref=e33]
+          - columnheader "匹配分" [ref=e34]
+          - columnheader "推荐理由" [ref=e35]
+      - rowgroup [ref=e36]:
+        - row "1 王轩 教授 计算机科学与技术学院 人工智能，博弈决策，量子计算 2 高效非完全信息对抗性团队博弈求解算法研究，人工智能赋能重大应用等 7.64 基于专业、兴趣、GPA和导师热度的内容匹配推荐" [ref=e37]:
+          - cell "1" [ref=e38]
+          - cell "王轩" [ref=e39]
+          - cell "教授" [ref=e40]
+          - cell "计算机科学与技术学院" [ref=e41]
+          - cell "人工智能，博弈决策，量子计算" [ref=e42]
+          - cell "2" [ref=e43]
+          - cell "高效非完全信息对抗性团队博弈求解算法研究，人工智能赋能重大应用等" [ref=e44]
+          - cell "7.64" [ref=e45]:
+            - generic [ref=e47]: "7.64"
+          - cell "基于专业、兴趣、GPA和导师热度的内容匹配推荐" [ref=e48]
+        - row "2 张加佳 教授 计算机科学与技术学院 计算机博弈决策，金融科技，多智能体群体智能 3 多层次金融风险智能预警关键技术及其应用，战略博弈推演系统创意设计赛等 4.64 基于专业、兴趣、GPA和导师热度的内容匹配推荐" [ref=e49]:
+          - cell "2" [ref=e50]
+          - cell "张加佳" [ref=e51]
+          - cell "教授" [ref=e52]
+          - cell "计算机科学与技术学院" [ref=e53]
+          - cell "计算机博弈决策，金融科技，多智能体群体智能" [ref=e54]
+          - cell "3" [ref=e55]
+          - cell "多层次金融风险智能预警关键技术及其应用，战略博弈推演系统创意设计赛等" [ref=e56]
+          - cell "4.64" [ref=e57]:
+            - generic [ref=e59]: "4.64"
+          - cell "基于专业、兴趣、GPA和导师热度的内容匹配推荐" [ref=e60]
+        - row "3 廖清 教授 计算机科学与技术学院 数据挖掘，信息安全 4 数据挖掘、人工智能、信息安全等方面的理论研究和工程实践 4.64 基于专业、兴趣、GPA和导师热度的内容匹配推荐" [ref=e61]:
+          - cell "3" [ref=e62]
+          - cell "廖清" [ref=e63]
+          - cell "教授" [ref=e64]
+          - cell "计算机科学与技术学院" [ref=e65]
+          - cell "数据挖掘，信息安全" [ref=e66]
+          - cell "4" [ref=e67]
+          - cell "数据挖掘、人工智能、信息安全等方面的理论研究和工程实践" [ref=e68]
+          - cell "4.64" [ref=e69]:
+            - generic [ref=e71]: "4.64"
+          - cell "基于专业、兴趣、GPA和导师热度的内容匹配推荐" [ref=e72]
+        - row "4 马琮淦 教授 汽车工程学院 车辆智能化，电动化相关研究 4 从事与车辆智能化、电动化相关研究，包括智能感知与决策、车联网与大数据、智能驾舱声场分区智能控制等 2.64 基于专业、兴趣、GPA和导师热度的内容匹配推荐" [ref=e73]:
+          - cell "4" [ref=e74]
+          - cell "马琮淦" [ref=e75]
+          - cell "教授" [ref=e76]
+          - cell "汽车工程学院" [ref=e77]
+          - cell "车辆智能化，电动化相关研究" [ref=e78]
+          - cell "4" [ref=e79]
+          - cell "从事与车辆智能化、电动化相关研究，包括智能感知与决策、车联网与大数据、智能驾舱声场分区智能控制等" [ref=e80]
+          - cell "2.64" [ref=e81]:
+            - generic [ref=e83]: "2.64"
+          - cell "基于专业、兴趣、GPA和导师热度的内容匹配推荐" [ref=e84]
+        - row "5 李俊夫 副教授，博导 汽车工程学院 电池高效精确建模，融合电化学机理和大数据驱动的电池管理 3 针对电池高效精确建模、在线状态感知、无损失效评估难题，开展相关基础理论研究及核心关键技术研发 2.64 基于专业、兴趣、GPA和导师热度的内容匹配推荐" [ref=e85]:
+          - cell "5" [ref=e86]
+          - cell "李俊夫" [ref=e87]
+          - cell "副教授，博导" [ref=e88]
+          - cell "汽车工程学院" [ref=e89]
+          - cell "电池高效精确建模，融合电化学机理和大数据驱动的电池管理" [ref=e90]
+          - cell "3" [ref=e91]
+          - cell "针对电池高效精确建模、在线状态感知、无损失效评估难题，开展相关基础理论研究及核心关键技术研发" [ref=e92]
+          - cell "2.64" [ref=e93]:
+            - generic [ref=e95]: "2.64"
+          - cell "基于专业、兴趣、GPA和导师热度的内容匹配推荐" [ref=e96]
+    - link "返回首页" [ref=e97] [cursor=pointer]:
+      - /url: /tutor-recommendation/student/home
+  - contentinfo [ref=e98]: 本科生-研究生导师推荐系统

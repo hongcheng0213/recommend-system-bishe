@@ -1,0 +1,161 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "导师推荐系统" [ref=e5] [cursor=pointer]:
+        - /url: /tutor-recommendation/student/home
+      - list [ref=e7]:
+        - listitem [ref=e8]:
+          - link "首页" [ref=e9] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/home
+        - listitem [ref=e10]:
+          - link "导师打分" [ref=e11] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/tutors
+        - listitem [ref=e12]:
+          - link "推荐结果" [ref=e13] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/recommend
+        - listitem [ref=e14]:
+          - link "导师浏览" [ref=e15] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/tutorBrowse
+        - listitem [ref=e16]:
+          - link "管理员" [ref=e17] [cursor=pointer]:
+            - /url: /tutor-recommendation/admin
+        - listitem [ref=e18]:
+          - link "退出登录" [ref=e19] [cursor=pointer]:
+            - /url: /tutor-recommendation/logout
+  - generic [ref=e20]:
+    - heading "导师信息浏览" [level=3] [ref=e24]
+    - generic [ref=e27]:
+      - generic [ref=e29]:
+        - generic [ref=e30]: 学校
+        - combobox [ref=e31]:
+          - option "全部学校" [selected]
+          - option "哈尔滨工业大学（深圳）"
+          - option "哈尔滨工业大学（威海）"
+          - option "哈尔滨工业大学"
+      - generic [ref=e33]:
+        - generic [ref=e34]: 院系
+        - combobox [ref=e35]:
+          - option "全部院系" [selected]
+          - option "计算机科学与技术学院"
+          - option "汽车工程学院"
+          - option "电子与信息工程学院"
+          - option "材料科学与工程学院"
+      - generic [ref=e37]:
+        - generic [ref=e38]: 关键词搜索
+        - generic [ref=e39]:
+          - textbox "姓名、研究方向" [ref=e40]
+          - button "搜索" [ref=e42] [cursor=pointer]
+      - button "重置筛选" [ref=e46] [cursor=pointer]
+    - generic [ref=e47]:
+      - generic [ref=e49]:
+        - img "谷延锋" [ref=e50]
+        - generic [ref=e51]:
+          - heading "谷延锋" [level=4] [ref=e52]
+          - paragraph [ref=e53]: 教授
+          - paragraph [ref=e54]:
+            - strong [ref=e55]: 学校：
+            - text: 哈尔滨工业大学
+          - paragraph [ref=e56]:
+            - strong [ref=e57]: 院系：
+            - text: 电子与信息工程学院
+          - paragraph [ref=e58]:
+            - strong [ref=e59]: 研究方向：
+            - text: 空天智能信息处理，高光谱遥感，多维度信息探测与处理系统
+          - link "访问官网" [ref=e60] [cursor=pointer]:
+            - /url: " http://homepage.hit.edu.cn/guyf"
+      - generic [ref=e62]:
+        - img "李杨" [ref=e63]
+        - generic [ref=e64]:
+          - heading "李杨" [level=4] [ref=e65]
+          - paragraph [ref=e66]: 教授
+          - paragraph [ref=e67]:
+            - strong [ref=e68]: 学校：
+            - text: 哈尔滨工业大学
+          - paragraph [ref=e69]:
+            - strong [ref=e70]: 院系：
+            - text: 电子与信息工程学院
+          - paragraph [ref=e71]:
+            - strong [ref=e72]: 研究方向：
+            - text: 认知雷达系统，智能信号处理，分布式组网协同探测与雷达电子对抗系统理论
+          - link "访问官网" [ref=e73] [cursor=pointer]:
+            - /url: " http://homepage.hit.edu.cn/liyang"
+      - generic [ref=e75]:
+        - img "刘大同" [ref=e76]
+        - generic [ref=e77]:
+          - heading "刘大同" [level=4] [ref=e78]
+          - paragraph [ref=e79]: 教授
+          - paragraph [ref=e80]:
+            - strong [ref=e81]: 学校：
+            - text: 哈尔滨工业大学
+          - paragraph [ref=e82]:
+            - strong [ref=e83]: 院系：
+            - text: 电子与信息工程学院
+          - paragraph [ref=e84]:
+            - strong [ref=e85]: 研究方向：
+            - text: 复杂系统智能感知，系统状态监测与健康管理，自主无人系统试验与评估
+          - link "访问官网" [ref=e86] [cursor=pointer]:
+            - /url: " http://homepage.hit.edu.cn/liudatong"
+      - generic [ref=e88]:
+        - img "黄永江" [ref=e89]
+        - generic [ref=e90]:
+          - heading "黄永江" [level=4] [ref=e91]
+          - paragraph [ref=e92]: 教授
+          - paragraph [ref=e93]:
+            - strong [ref=e94]: 学校：
+            - text: 哈尔滨工业大学
+          - paragraph [ref=e95]:
+            - strong [ref=e96]: 院系：
+            - text: 材料科学与工程学院
+          - paragraph [ref=e97]:
+            - strong [ref=e98]: 研究方向：
+            - text: 新型航天金属材料的增材，增减材智能制造、亚稳金属材料
+          - link "访问官网" [ref=e99] [cursor=pointer]:
+            - /url: " http://homepage.hit.edu.cn/yjhuang"
+      - generic [ref=e101]:
+        - img "黄陆军" [ref=e102]
+        - generic [ref=e103]:
+          - heading "黄陆军" [level=4] [ref=e104]
+          - paragraph [ref=e105]: 教授
+          - paragraph [ref=e106]:
+            - strong [ref=e107]: 学校：
+            - text: 哈尔滨工业大学
+          - paragraph [ref=e108]:
+            - strong [ref=e109]: 院系：
+            - text: 材料科学与工程学院
+          - paragraph [ref=e110]:
+            - strong [ref=e111]: 研究方向：
+            - text: 激光3D打印智能制造，锂电池正极材料改性
+          - link "访问官网" [ref=e112] [cursor=pointer]:
+            - /url: " http://homepage.hit.edu.cn/huanglujun"
+      - generic [ref=e114]:
+        - img "田艳红" [ref=e115]
+        - generic [ref=e116]:
+          - heading "田艳红" [level=4] [ref=e117]
+          - paragraph [ref=e118]: 教授
+          - paragraph [ref=e119]:
+            - strong [ref=e120]: 学校：
+            - text: 哈尔滨工业大学
+          - paragraph [ref=e121]:
+            - strong [ref=e122]: 院系：
+            - text: 材料科学与工程学院
+          - paragraph [ref=e123]:
+            - strong [ref=e124]: 研究方向：
+            - text: 先进封装异质集成及可靠性，功率芯片封装及可靠性，柔性可穿戴传感与储能器件集成
+          - link "访问官网" [ref=e125] [cursor=pointer]:
+            - /url: " http://homepage.hit.edu.cn/tinatian"
+    - generic [ref=e126]:
+      - list [ref=e127]:
+        - listitem:
+          - link "«" [ref=e128] [cursor=pointer]:
+            - /url: "?page=1"
+        - listitem:
+          - link "1" [ref=e129] [cursor=pointer]:
+            - /url: "?page=1"
+        - listitem:
+          - link "2" [ref=e130]:
+            - /url: "?page=2"
+        - listitem:
+          - link "»" [ref=e131]:
+            - /url: "?page=3"
+      - text: 共 12 位导师
+  - contentinfo [ref=e132]: 本科生-研究生导师推荐系统

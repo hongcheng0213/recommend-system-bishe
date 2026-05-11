@@ -11,10 +11,12 @@
     <style>
         .body-padding{padding-top:70px;padding-bottom:70px;}
         .footer{background:#f7f7f7;padding:12px 0;}
-        .tutor-card{border:1px solid #ddd;border-radius:8px;overflow:hidden;transition:all 0.3s ease;}
+        .tutor-card-row{display:flex;flex-wrap:wrap;}
+        .tutor-card-row>[class*='col-']{display:flex;flex-direction:column;margin-bottom:30px;}
+        .tutor-card{border:1px solid #ddd;border-radius:8px;overflow:hidden;transition:all 0.3s ease;flex:1;display:flex;flex-direction:column;}
         .tutor-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.15);transform:translateY(-2px);}
         .tutor-photo{height:200px;object-fit:cover;width:100%;}
-        .tutor-info{padding:15px;}
+        .tutor-info{padding:15px;flex:1;}
         .search-filter{background:#f8f9fa;padding:20px;border-radius:8px;margin-bottom:30px;}
         .loading{text-align:center;padding:50px;}
     </style>
@@ -133,7 +135,7 @@
     </div>
     
     <!-- 导师卡片列表 -->
-    <div class="row">
+    <div class="row tutor-card-row">
         <% 
             List<Tutor> tutors = (List<Tutor>) request.getAttribute("tutors");
             if (tutors == null || tutors.isEmpty()) {
@@ -163,10 +165,40 @@
                     </div>
                 </div>
             </div>
-        <% 
-            }
-        } %>
+        <% } } %>
     </div>
+
+    <%-- 分页控件 --%>
+    <%
+        int currentPage = (Integer) request.getAttribute("currentPage");
+        int totalPages = (Integer) request.getAttribute("totalPages");
+        int totalTutors = (Integer) request.getAttribute("totalTutors");
+        if (totalPages > 1) {
+            String queryStr = "";
+            if (request.getParameter("university") != null)
+                queryStr += "&university=" + java.net.URLEncoder.encode(request.getParameter("university"), "UTF-8");
+            if (request.getParameter("department") != null)
+                queryStr += "&department=" + java.net.URLEncoder.encode(request.getParameter("department"), "UTF-8");
+            if (request.getParameter("keyword") != null)
+                queryStr += "&keyword=" + java.net.URLEncoder.encode(request.getParameter("keyword"), "UTF-8");
+    %>
+    <div class="text-center">
+        <ul class="pagination">
+            <li class="<%= currentPage <= 1 ? "disabled" : "" %>">
+                <a href="?page=<%= currentPage - 1 %><%= queryStr %>">&laquo;</a>
+            </li>
+            <% for (int p = 1; p <= totalPages; p++) { %>
+            <li class="<%= p == currentPage ? "active" : "" %>">
+                <a href="?page=<%= p %><%= queryStr %>"><%= p %></a>
+            </li>
+            <% } %>
+            <li class="<%= currentPage >= totalPages ? "disabled" : "" %>">
+                <a href="?page=<%= currentPage + 1 %><%= queryStr %>">&raquo;</a>
+            </li>
+        </ul>
+        <small class="text-muted">共 <%= totalTutors %> 位导师</small>
+    </div>
+    <% } %>
 </div>
 <footer class="footer text-center">本科生-研究生导师推荐系统</footer>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

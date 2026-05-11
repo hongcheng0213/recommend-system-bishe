@@ -4,6 +4,7 @@ import com.example.recommend.dao.StudentDAO;
 import com.example.recommend.dao.StudentExtDAO;
 import com.example.recommend.model.Student;
 import com.example.recommend.model.StudentExt;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -61,7 +62,8 @@ public class RegisterServlet extends HttpServlet {
         student.setInterests(interests);
         student.setScore(score);
 
-        boolean success = studentDAO.create(student, password);
+        String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
+        boolean success = studentDAO.create(student, passwordHash);
         if (success) {
             StudentExt ext = new StudentExt();
             ext.setStudentId(student.getId());

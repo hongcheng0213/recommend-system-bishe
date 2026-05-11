@@ -1,0 +1,12 @@
+- generic [active] [ref=e1]:
+  - heading "HTTP Status 500 - Invalid salt revision" [level=1] [ref=e2]
+  - separator [ref=e3]
+  - paragraph [ref=e4]: type Exception report
+  - paragraph [ref=e5]: message Invalid salt revision
+  - paragraph [ref=e6]: description The server encountered an internal error that prevented it from fulfilling this request.
+  - paragraph [ref=e7]: exception
+  - generic [ref=e8]: "java.lang.IllegalArgumentException: Invalid salt revision org.mindrot.jbcrypt.BCrypt.hashpw(BCrypt.java:665) org.mindrot.jbcrypt.BCrypt.checkpw(BCrypt.java:764) com.example.recommend.web.LoginServlet.doPost(LoginServlet.java:32) javax.servlet.http.HttpServlet.service(HttpServlet.java:647) javax.servlet.http.HttpServlet.service(HttpServlet.java:728) org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)"
+  - paragraph
+  - paragraph [ref=e9]: note The full stack trace of the root cause is available in the Apache Tomcat/7.0.47 logs.
+  - separator [ref=e10]
+  - heading "Apache Tomcat/7.0.47" [level=3] [ref=e11]

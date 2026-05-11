@@ -1,0 +1,52 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx --version)",
+      "Bash(mysqladmin ping *)",
+      "Bash(npx -y @modelcontextprotocol/server-mysql --help)",
+      "Bash(npx -y @anthropic/mcp-server-mysql --help)",
+      "Bash(npm search *)",
+      "Bash(npx *)",
+      "Bash(npm info *)",
+      "Bash(MYSQL_HOST=localhost MYSQL_USER=root MYSQL_PASSWORD=133233 MYSQL_DATABASE=tutor_recommendation_dev npx -y mcp-server-mysql)",
+      "Bash(kill %1)",
+      "Bash(DATABASE_URL=\"mysql://root:133233@localhost:3306/tutor_recommendation_dev\" npx -y mcp-server-mysql)",
+      "Bash(cd /tmp)",
+      "Bash(cat)",
+      "Bash(npm cache *)",
+      "Bash(claude mcp *)",
+      "mcp__mysql__mysql_query",
+      "Bash(mysql *)",
+      "mcp__ide__executeCode",
+      "Bash(python -c \"import bcrypt; print\\('ok'\\)\")",
+      "Bash(pip install *)",
+      "Bash(python -c ' *)",
+      "Bash(mvn compile *)",
+      "Bash(mvn clean *)",
+      "Bash(where tomcat *)",
+      "Bash(where catalina *)",
+      "Read(//c/Program Files/**)",
+      "Read(//d//**)",
+      "Read(//d/Program Files/**)",
+      "Read(//c/Users/张红程/**)",
+      "Read(//d/yydownload/**)",
+      "Bash(mvn tomcat7:run)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:8080/tutor-recommendation/login.jsp\")",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_fill_form",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "Bash(taskkill //F //IM java.exe)",
+      "Bash(wc -l \"D:\\\\\\\\yydownload\\\\\\\\testcode_file\\\\\\\\AIcode\\\\\\\\version2\\\\\\\\recommend\\\\\\\\src\\\\\\\\main\\\\\\\\webapp\\\\\\\\tutorBrowse.jsp\")",
+      "Bash(grep -n \"}\" \"D:\\\\\\\\yydownload\\\\\\\\testcode_file\\\\\\\\AIcode\\\\\\\\version2\\\\\\\\recommend\\\\\\\\src\\\\\\\\main\\\\\\\\webapp\\\\\\\\tutorBrowse.jsp\")",
+      "Bash(sed -i '166s/<% } %>/<% } } %>/' \"D:\\\\\\\\yydownload\\\\\\\\testcode_file\\\\\\\\AIcode\\\\\\\\version2\\\\\\\\recommend\\\\\\\\src\\\\\\\\main\\\\\\\\webapp\\\\\\\\tutorBrowse.jsp\")",
+      "Bash(sed -n '166p' \"D:\\\\\\\\yydownload\\\\\\\\testcode_file\\\\\\\\AIcode\\\\\\\\version2\\\\\\\\recommend\\\\\\\\src\\\\\\\\main\\\\\\\\webapp\\\\\\\\tutorBrowse.jsp\")",
+      "mcp__plugin_playwright_playwright__browser_evaluate"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "mysql"
+  ]
+}

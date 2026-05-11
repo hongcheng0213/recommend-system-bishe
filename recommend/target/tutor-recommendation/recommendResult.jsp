@@ -47,7 +47,7 @@
                 <tbody>
                 <% int rank = 1; for (TutorScore ts : recommendations) {
                     double score = ts.getScore();
-                    int percent = (int) Math.max(0, Math.min(100, score * 20));
+                    int percent = (int) Math.max(0, Math.min(100, score * 10));
                     String reason = ts.getReason(); if (reason == null || reason.trim().isEmpty()) reason = "综合协同与内容匹配";
                 %>
                 <tr>

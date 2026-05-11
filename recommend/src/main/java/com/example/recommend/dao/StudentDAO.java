@@ -10,6 +10,21 @@ import java.sql.SQLException;
 
 public class StudentDAO {
 
+    public Student findByName(String username) {
+        String sql = "SELECT * FROM students WHERE name = ?";
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return mapRow(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Student findByUsernameAndPassword(String username, String password) {
         String sql = "SELECT * FROM students WHERE name = ? AND password = ?";
         try (Connection conn = DBUtil.getConnection();
@@ -26,12 +41,12 @@ public class StudentDAO {
         return null;
     }
 
-    public boolean create(Student student, String password) {
+    public boolean create(Student student, String passwordHash) {
         String sql = "INSERT INTO students(name, password, gender, major, grade, interests, score) VALUES(?,?,?,?,?,?,?)";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, student.getName());
-            ps.setString(2, password);
+            ps.setString(2, passwordHash);
             ps.setString(3, student.getGender());
             ps.setString(4, student.getMajor());
             ps.setString(5, student.getGrade());
@@ -70,6 +85,7 @@ public class StudentDAO {
         Student s = new Student();
         s.setId(rs.getInt("id"));
         s.setName(rs.getString("name"));
+        s.setPasswordHash(rs.getString("password"));
         s.setGender(rs.getString("gender"));
         s.setMajor(rs.getString("major"));
         s.setGrade(rs.getString("grade"));

@@ -33,7 +33,7 @@
         <p>这是你的个人主页。你可以先填写意向导师，然后查看推荐结果。</p>
         <p>
             <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/student/tutors">意向导师</a>
-            <a class="btn btn-success btn-lg" href="${pageContext.request.contextPath}/student/recommend">查看推荐推荐</a>
+            <a class="btn btn-success btn-lg" href="${pageContext.request.contextPath}/student/recommend">查看推荐结果</a>
         </p>
     </div>
     <div class="row">
