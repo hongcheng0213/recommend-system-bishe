@@ -6,16 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>导师推荐系统 - 登录</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
-    <style>body {padding-top: 70px;}</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
-<body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<body class="gradient-bg">
+<nav class="navbar navbar-custom navbar-transparent navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
                 <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/login.jsp">导师推荐系统</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/login.jsp">
+                <i class="fa fa-graduation-cap"></i> 导师推荐系统
+            </a>
         </div>
         <div class="collapse navbar-collapse" id="nav-collapse">
             <ul class="nav navbar-nav">
@@ -26,44 +29,49 @@
         </div>
     </div>
 </nav>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-primary">
-                <div class="panel-heading"><h3 class="panel-title">学生登录</h3></div>
-                <div class="panel-body">
-                    <form method="post" action="${pageContext.request.contextPath}/login" id="loginForm">
-                        <div class="form-group">
-                            <label>用户名（学生姓名）</label>
-                            <input class="form-control" type="text" name="username" required>
-                        </div>
-                        <div class="form-group">
-                            <label>密码</label>
-                            <input class="form-control" type="password" name="password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">登录</button>
-                    </form>
-                    <hr>
-                    <p>还没有账号？<a href="${pageContext.request.contextPath}/index.jsp">立即注册</a></p>
-                    <div id="loginError" class="text-danger"></div>
-                    <%
-                        String error = (String) request.getAttribute("error");
-                        if (error != null) {
-                    %>
-                    <div class="alert alert-danger" style="margin-top:10px;"><%= error %></div>
-                    <%
-                        }
-                    %>
+
+<div class="login-wrapper">
+    <div class="login-container">
+        <div class="login-brand">
+            <h2><i class="fa fa-graduation-cap"></i> 导师推荐系统</h2>
+            <p class="slogan">智能匹配 · 精准推荐 · 成就未来</p>
+            <ul class="features">
+                <li><i class="fa fa-check-circle"></i> 协同过滤智能推荐算法</li>
+                <li><i class="fa fa-check-circle"></i> 多维度导师信息浏览</li>
+                <li><i class="fa fa-check-circle"></i> 个性化意向导师选择</li>
+            </ul>
+        </div>
+        <div class="login-card">
+            <div class="card-title"><i class="fa fa-user"></i> 学生登录</div>
+            <form method="post" action="${pageContext.request.contextPath}/login" id="loginForm">
+                <div class="form-group">
+                    <label>用户名（学生姓名）</label>
+                    <input class="form-control" type="text" name="username" placeholder="请输入姓名" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input class="form-control" type="password" name="password" placeholder="请输入密码" required>
+                </div>
+                <button type="submit" class="btn-login">登 录</button>
+            </form>
+            <p class="register-link">还没有账号？<a href="${pageContext.request.contextPath}/index.jsp">立即注册 <i class="fa fa-arrow-right"></i></a></p>
+            <%
+                String error = (String) request.getAttribute("error");
+                if (error != null) {
+            %>
+            <div class="alert alert-danger"><%= error %></div>
+            <%
+                }
+            %>
         </div>
     </div>
 </div>
-<footer class="footer text-center" style="padding:15px 0; background:#f7f7f7; position:fixed; width:100%; bottom:0;">
-    <div class="container">本科生-研究生导师推荐系统</div>
+
+<footer class="login-footer">
+    <div>本科生—研究生导师推荐系统</div>
 </footer>
+
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-
