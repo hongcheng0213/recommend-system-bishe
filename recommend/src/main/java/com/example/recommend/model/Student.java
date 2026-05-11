@@ -9,6 +9,7 @@ public class Student {
     private String interests;
     private double score;
     private String passwordHash;
+    private boolean isAdmin;
 
     public int getId() {
         return id;
@@ -72,6 +73,14 @@ public class Student {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }
 

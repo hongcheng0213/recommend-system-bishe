@@ -11,10 +11,12 @@
     <style>
         .body-padding{padding-top:70px;padding-bottom:70px;}
         .footer{background:#f7f7f7;padding:12px 0;}
-        .tutor-card{border:1px solid #ddd;border-radius:8px;overflow:hidden;transition:all 0.3s ease;}
+        .tutor-card-row{display:flex;flex-wrap:wrap;}
+        .tutor-card-row>[class*='col-']{display:flex;flex-direction:column;margin-bottom:30px;}
+        .tutor-card{border:1px solid #ddd;border-radius:8px;overflow:hidden;transition:all 0.3s ease;flex:1;display:flex;flex-direction:column;}
         .tutor-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.15);transform:translateY(-2px);}
         .tutor-photo{height:200px;object-fit:cover;width:100%;}
-        .tutor-info{padding:15px;}
+        .tutor-info{padding:15px;flex:1;}
         .search-filter{background:#f8f9fa;padding:20px;border-radius:8px;margin-bottom:30px;}
         .loading{text-align:center;padding:50px;}
     </style>
@@ -32,7 +34,9 @@
                 <li><a href="${pageContext.request.contextPath}/student/tutors">导师打分</a></li>
                 <li><a href="${pageContext.request.contextPath}/student/recommend">推荐结果</a></li>
                 <li class="active"><a href="${pageContext.request.contextPath}/student/tutorBrowse">导师浏览</a></li>
+                <% if (session.getAttribute("isAdmin") != null && (Boolean) session.getAttribute("isAdmin")) { %>
                 <li><a href="${pageContext.request.contextPath}/admin">管理员</a></li>
+                <% } %>
                 <li><a href="${pageContext.request.contextPath}/logout">退出登录</a></li>
             </ul>
         </div>
@@ -133,7 +137,7 @@
     </div>
     
     <!-- 导师卡片列表 -->
-    <div class="row">
+    <div class="row tutor-card-row">
         <% 
             List<Tutor> tutors = (List<Tutor>) request.getAttribute("tutors");
             if (tutors == null || tutors.isEmpty()) {

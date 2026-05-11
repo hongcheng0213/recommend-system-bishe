@@ -23,7 +23,9 @@
                 <li><a href="${pageContext.request.contextPath}/student/tutors">导师打分</a></li>
                 <li class="active"><a href="${pageContext.request.contextPath}/student/recommend">推荐结果</a></li>
                 <li><a href="${pageContext.request.contextPath}/student/tutorBrowse">导师浏览</a></li>
+                <% if (session.getAttribute("isAdmin") != null && (Boolean) session.getAttribute("isAdmin")) { %>
                 <li><a href="${pageContext.request.contextPath}/admin">管理员</a></li>
+                <% } %>
                 <li><a href="${pageContext.request.contextPath}/logout">退出登录</a></li>
             </ul>
         </div>
@@ -42,13 +44,19 @@
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
                 <thead>
-                <tr><th>排名</th><th>导师</th><th>职称</th><th>学院</th><th>研究方向</th><th>招生名额</th><th>研究成果</th><th>匹配分</th><th>推荐理由</th></tr>
+                <tr><th>排名</th><th>导师</th><th>职称</th><th>学院</th><th>研究方向</th><th>招生名额</th><th>研究成果</th><th style="min-width:120px;">匹配分</th><th>推荐理由</th></tr>
                 </thead>
                 <tbody>
-                <% int rank = 1; for (TutorScore ts : recommendations) {
-                    double score = ts.getScore();
-                    int percent = (int) Math.max(0, Math.min(100, score * 10));
-                    String reason = ts.getReason(); if (reason == null || reason.trim().isEmpty()) reason = "综合协同与内容匹配";
+                <%
+                    double maxScore = 0;
+                    for (TutorScore ts : recommendations) {
+                        if (ts.getScore() > maxScore) maxScore = ts.getScore();
+                    }
+                    int rank = 1;
+                    for (TutorScore ts : recommendations) {
+                        double score = ts.getScore();
+                        int percent = maxScore > 0 ? (int) Math.max(5, Math.min(100, (score / maxScore) * 100)) : 50;
+                        String reason = ts.getReason(); if (reason == null || reason.trim().isEmpty()) reason = "综合协同与内容匹配";
                 %>
                 <tr>
                     <td><%= rank++ %></td>
@@ -58,7 +66,11 @@
                     <td><%= ts.getTutor().getResearchFields() %></td>
                     <td><%= ts.getTutor().getStudentQuota() %></td>
                     <td><%= ts.getTutor().getResearchAchievement() == null ? "无" : ts.getTutor().getResearchAchievement() %></td>
-                    <td><div class="progress"><div class="progress-bar progress-bar-success" style="width:<%= percent %>%"><%= String.format("%.2f", score) %></div></div></td>
+                    <td>
+                        <div class="progress" style="margin-bottom:3px;">
+                            <div class="progress-bar progress-bar-success" style="width:<%= percent %>%;color:#000;"><%= String.format("%.2f", score) %></div>
+                        </div>
+                    </td>
                     <td><%= reason %></td>
                 </tr>
                 <% } %>

@@ -12,7 +12,10 @@ import java.util.List;
 
 public class TutorExtDAO {
     public boolean saveOrUpdate(TutorExt ext) {
-        String sql = "REPLACE INTO tutor_ext(tutor_id, title, research_achievement, student_quota, hot_score) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO tutor_ext(tutor_id, title, research_achievement, student_quota, hot_score) " +
+                     "VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE " +
+                     "title=VALUES(title), research_achievement=VALUES(research_achievement), " +
+                     "student_quota=VALUES(student_quota), hot_score=VALUES(hot_score)";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, ext.getTutorId());

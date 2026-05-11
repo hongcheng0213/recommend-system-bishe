@@ -42,17 +42,16 @@
         <table class="table table-bordered table-striped table-hover">
             <thead><tr><th>排名</th><th>导师姓名</th><th>研究方向</th><th>学院</th><th>匹配分数</th><th>推荐理由</th></tr></thead>
             <tbody>
-            <% int rank=1; for (TutorScore ts : recommendations) { double score = ts.getScore(); int percent = (int) Math.min(100, Math.max(0, score * 20)); String reason = ts.getReason(); if (reason == null || reason.trim().isEmpty()) reason = "综合协同与内容匹配"; %>
+            <% double maxScore = 0; for (TutorScore ts : recommendations) { if (ts.getScore() > maxScore) maxScore = ts.getScore(); } int rank=1; for (TutorScore ts : recommendations) { double score = ts.getScore(); int percent = maxScore > 0 ? (int) Math.max(5, Math.min(100, (score / maxScore) * 100)) : 50; String reason = ts.getReason(); if (reason == null || reason.trim().isEmpty()) reason = "综合协同与内容匹配"; %>
                 <tr>
                     <td><%= rank++ %></td>
                     <td><%= ts.getTutor().getName() %></td>
                     <td><%= ts.getTutor().getResearchFields() %></td>
                     <td><%= ts.getTutor().getDepartment() %></td>
                     <td>
-                        <div class="progress" style="margin-bottom: 5px;">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100" style="width:<%= percent %>%"><%= String.format("%.2f", score) %></div>
+                        <div class="progress" style="margin-bottom: 3px;">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100" style="width:<%= percent %>%;color:#000;"><%= String.format("%.2f", score) %></div>
                         </div>
-                        <small><%= percent %>% 匹配度</small>
                     </td>
                     <td><%= reason %></td>
                 </tr>

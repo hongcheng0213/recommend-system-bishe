@@ -34,7 +34,9 @@
                 <li><a href="${pageContext.request.contextPath}/student/tutors">导师打分</a></li>
                 <li><a href="${pageContext.request.contextPath}/student/recommend">推荐结果</a></li>
                 <li class="active"><a href="${pageContext.request.contextPath}/student/tutorBrowse">导师浏览</a></li>
+                <% if (session.getAttribute("isAdmin") != null && (Boolean) session.getAttribute("isAdmin")) { %>
                 <li><a href="${pageContext.request.contextPath}/admin">管理员</a></li>
+                <% } %>
                 <li><a href="${pageContext.request.contextPath}/logout">退出登录</a></li>
             </ul>
         </div>

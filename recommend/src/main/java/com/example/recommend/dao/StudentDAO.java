@@ -91,6 +91,7 @@ public class StudentDAO {
         s.setGrade(rs.getString("grade"));
         s.setInterests(rs.getString("interests"));
         s.setScore(rs.getDouble("score"));
+        try { s.setAdmin(rs.getBoolean("is_admin")); } catch (SQLException ignored) {}
         return s;
     }
 }

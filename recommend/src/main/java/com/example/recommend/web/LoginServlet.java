@@ -33,6 +33,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("studentId", student.getId());
             session.setAttribute("studentName", student.getName());
+            session.setAttribute("isAdmin", student.isAdmin());
             resp.sendRedirect(req.getContextPath() + "/student/home");
         } else {
             req.setAttribute("error", "用户名或密码错误");

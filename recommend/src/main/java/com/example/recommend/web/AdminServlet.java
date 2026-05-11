@@ -36,19 +36,40 @@ public class AdminServlet extends HttpServlet {
         String hotScoreStr = req.getParameter("hotScore");
 
         int tutorId = 0;
-        int studentQuota = 0;
-        int hotScore = 0;
         try { tutorId = Integer.parseInt(tutorIdStr); } catch (Exception ignored) {}
-        try { studentQuota = Integer.parseInt(studentQuotaStr); } catch (Exception ignored) {}
-        try { hotScore = Integer.parseInt(hotScoreStr); } catch (Exception ignored) {}
 
         if (tutorId > 0) {
+            TutorExt existing = tutorExtDAO.findByTutorId(tutorId);
+
             TutorExt ext = new TutorExt();
             ext.setTutorId(tutorId);
-            ext.setTitle(title);
-            ext.setResearchAchievement(achievement);
-            ext.setStudentQuota(studentQuota);
-            ext.setHotScore(hotScore);
+
+            // 文本字段：如果为空则保留原值
+            if (title != null && !title.trim().isEmpty()) {
+                ext.setTitle(title.trim());
+            } else if (existing != null) {
+                ext.setTitle(existing.getTitle());
+            }
+
+            if (achievement != null && !achievement.trim().isEmpty()) {
+                ext.setResearchAchievement(achievement.trim());
+            } else if (existing != null) {
+                ext.setResearchAchievement(existing.getResearchAchievement());
+            }
+
+            // 数字字段：如果为空则保留原值
+            if (studentQuotaStr != null && !studentQuotaStr.trim().isEmpty()) {
+                try { ext.setStudentQuota(Integer.parseInt(studentQuotaStr.trim())); } catch (Exception ignored) {}
+            } else if (existing != null) {
+                ext.setStudentQuota(existing.getStudentQuota());
+            }
+
+            if (hotScoreStr != null && !hotScoreStr.trim().isEmpty()) {
+                try { ext.setHotScore(Integer.parseInt(hotScoreStr.trim())); } catch (Exception ignored) {}
+            } else if (existing != null) {
+                ext.setHotScore(existing.getHotScore());
+            }
+
             tutorExtDAO.saveOrUpdate(ext);
             req.setAttribute("success", "导师信息已保存");
         } else {

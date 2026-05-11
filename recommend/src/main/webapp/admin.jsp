@@ -1,6 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.recommend.model.Tutor" %>
+<%
+    Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+    if (isAdmin == null || !isAdmin) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +26,9 @@
         </div>
         <div class="collapse navbar-collapse" id="navMain">
             <ul class="nav navbar-nav">
-                <li><a href="${pageContext.request.contextPath}/index.jsp">首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/login.jsp">登录</a></li>
+                <li><a href="${pageContext.request.contextPath}/student/home">首页</a></li>
                 <li class="active"><a href="${pageContext.request.contextPath}/admin">管理员</a></li>
+                <li><a href="${pageContext.request.contextPath}/logout">退出登录</a></li>
             </ul>
         </div>
     </div>
