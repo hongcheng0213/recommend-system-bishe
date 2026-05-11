@@ -76,8 +76,8 @@
                                     </select>
                                 </div>
                                 <div class=”form-group”>
-                                    <label>成绩（0-100）</label>
-                                    <input class=”form-control” type=”number” name=”score” min=”0” max=”100” placeholder=”如：85”>
+                                    <label>考研成绩（0-500）</label>
+                                    <input class=”form-control” type=”number” name=”score” min=”0” max=”500” placeholder=”如：385”>
                                 </div>
                                 <div class=”form-group”>
                                     <label>绩点 GPA（0-4）</label>
@@ -137,7 +137,7 @@ $(function(){
         if (interests === '') { e.preventDefault(); showModal('注册错误', '请填写感兴趣的研究方向'); return; }
         if (phone === '') { e.preventDefault(); showModal('注册错误', '联系电话不能为空'); return; }
         var score = $('input[name=”score”]').val();
-        if (score !== '' && (isNaN(score) || score < 0 || score > 100)) { e.preventDefault(); showModal('注册错误', '成绩请输入0-100的数值'); return; }
+        if (score !== '' && (isNaN(score) || score < 0 || score > 500)) { e.preventDefault(); showModal('注册错误', '考研成绩请输入0-500的数值'); return; }
         var gpa = $('input[name=”gpa”]').val();
         if (gpa !== '' && (isNaN(gpa) || gpa < 0 || gpa > 4)) { e.preventDefault(); showModal('注册错误', 'GPA请输入0-4的数值'); return; }
         $('#submitBtn').prop('disabled', true);
