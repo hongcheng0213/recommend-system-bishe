@@ -1,0 +1,281 @@
+/* ====== 全局 ====== */
+html, body {
+    height: 100%;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", sans-serif;
+}
+
+/* ====== 背景 ====== */
+.gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+.page-bg {
+    background: #f5f6fa;
+}
+
+/* ====== 导航栏 ====== */
+.navbar-custom {
+    border: none;
+    margin-bottom: 0;
+}
+/* 登录页透明导航 */
+.navbar-transparent {
+    background: transparent;
+}
+.navbar-transparent .navbar-brand,
+.navbar-transparent .navbar-nav > li > a {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+.navbar-transparent .navbar-nav > li > a:hover,
+.navbar-transparent .navbar-nav > li > a:focus {
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+.navbar-transparent .navbar-toggle {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+.navbar-transparent .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+/* 主页白色导航 */
+.navbar-white {
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+.navbar-white .navbar-brand {
+    color: #667eea !important;
+    font-weight: 700;
+}
+.navbar-white .navbar-nav > li > a {
+    color: #555 !important;
+}
+.navbar-white .navbar-nav > li.active > a,
+.navbar-white .navbar-nav > li > a:hover {
+    color: #667eea !important;
+    background: transparent !important;
+}
+
+/* ====== 登录页 ====== */
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 120px);
+    padding: 20px 15px;
+}
+.login-container {
+    display: flex;
+    max-width: 580px;
+    width: 100%;
+    align-items: center;
+    gap: 28px;
+}
+.login-brand {
+    flex: 1;
+    color: #fff;
+    text-align: center;
+}
+.login-brand h2 {
+    color: #fff;
+    margin: 0 0 6px 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+.login-brand .slogan {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-bottom: 14px;
+}
+.login-brand .features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.75;
+}
+.login-brand .features li {
+    padding: 3px 0;
+}
+.login-brand .features li i {
+    margin-right: 4px;
+}
+.login-card {
+    width: 260px;
+    min-width: 260px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px 22px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+.login-card .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #333;
+    text-align: center;
+}
+.login-card .form-control {
+    border-radius: 20px;
+    height: 40px;
+    padding: 6px 18px;
+    border: 1px solid #e0e0e0;
+    box-shadow: none;
+}
+.login-card .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.15);
+}
+.login-card .btn-login {
+    width: 100%;
+    border-radius: 20px;
+    height: 40px;
+    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.login-card .btn-login:hover {
+    opacity: 0.9;
+}
+.login-card .register-link {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #999;
+}
+.login-card .register-link a {
+    color: #667eea;
+}
+.login-card .alert {
+    margin-bottom: 0;
+    margin-top: 10px;
+    border-radius: 6px;
+}
+.login-card hr {
+    margin: 12px 0;
+}
+.login-footer {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12px;
+    padding-bottom: 18px;
+}
+
+/* ====== 主页 ====== */
+.body-padding {
+    padding-top: 80px;
+    padding-bottom: 40px;
+}
+.welcome-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 26px 30px;
+    color: #fff;
+    margin-bottom: 22px;
+}
+.welcome-banner h3 {
+    color: #fff;
+    margin: 0 0 5px 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+.welcome-banner .student-meta {
+    font-size: 13px;
+    opacity: 0.85;
+}
+.quick-entries {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+.quick-entry {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 14px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.quick-entry:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+}
+.quick-entry .qe-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 8px;
+}
+.qe-icon-purple {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+.qe-icon-pink {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+}
+.qe-icon-blue {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+.quick-entry .qe-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+.quick-entry .qe-desc {
+    font-size: 12px;
+    color: #999;
+}
+.info-cards {
+    display: flex;
+    gap: 14px;
+}
+.info-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.info-card .ic-title {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.info-card .ic-table {
+    width: 100%;
+    font-size: 13px;
+}
+.info-card .ic-table td {
+    padding: 4px 0;
+    vertical-align: top;
+}
+.info-card .ic-table .ic-label {
+    color: #aaa;
+    width: 75px;
+}
+.page-header {
+    display: none;
+}
+.footer {
+    background: transparent !important;
+    padding: 12px 0;
+    text-align: center;
+    color: #bbb;
+    font-size: 12px;
+}
