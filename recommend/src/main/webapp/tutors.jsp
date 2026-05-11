@@ -51,7 +51,7 @@
                         <tbody>
                         <% for (Tutor t : tutors) {
                                Object r = ratingMap.get(t.getId());
-                               double selectedScore = (r instanceof Number) ? ((Number) r).doubleValue() : 3.0;
+                               double selectedScore = (r instanceof Number) ? ((Number) r).doubleValue() : -1;
                         %>
                             <tr>
                                 <td><%= t.getId() %></td>
@@ -60,9 +60,10 @@
                                 <td><%= t.getResearchFields() %></td>
                                 <td><%= t.getQuota() %></td>
                                 <td>
-                                    <select name="score_<%= t.getId() %>" class="form-control input-sm" style="width:80px; display:inline-block;">
+                                    <select name="score_<%= t.getId() %>" class="form-control input-sm" style="width:90px; display:inline-block;">
+                                        <option value="">未评分</option>
                                     <% for (int i = 1; i <= 5; i++) { %>
-                                        <option value="<%= i %>" <%= (int) selectedScore == i ? "selected" : "" %>><%= i %></option>
+                                        <option value="<%= i %>" <%= (int) selectedScore == i ? "selected" : "" %>><%= i %>分</option>
                                     <% } %>
                                     </select>
                                 </td>
