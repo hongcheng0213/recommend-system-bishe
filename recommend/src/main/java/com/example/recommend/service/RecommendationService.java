@@ -4,12 +4,10 @@ import com.example.recommend.dao.PreferenceDAO;
 import com.example.recommend.dao.StudentDAO;
 import com.example.recommend.dao.StudentExtDAO;
 import com.example.recommend.dao.TutorDAO;
-import com.example.recommend.dao.TutorExtDAO;
 import com.example.recommend.model.Student;
 import com.example.recommend.model.StudentExt;
 import com.example.recommend.model.StudentPreference;
 import com.example.recommend.model.Tutor;
-import com.example.recommend.model.TutorExt;
 import com.example.recommend.model.TutorScore;
 
 import java.util.*;
@@ -21,14 +19,12 @@ public class RecommendationService {
     private static final double W_INTEREST = 1.5;
     private static final double W_MAJOR = 2.0;
     private static final double W_GPA = 2.0;
-    private static final double W_SCORE = 0.5;
-    private static final double W_HOT = 0.5;
+    private static final double W_SCORE = 3.0;
 
     private final PreferenceDAO preferenceDAO = new PreferenceDAO();
     private final TutorDAO tutorDAO = new TutorDAO();
     private final StudentDAO studentDAO = new StudentDAO();
     private final StudentExtDAO studentExtDAO = new StudentExtDAO();
-    private final TutorExtDAO tutorExtDAO = new TutorExtDAO();
 
     public List<TutorScore> recommendForStudent(int studentId, int topN) {
         Student target = studentDAO.findById(studentId);
@@ -163,15 +159,11 @@ public class RecommendationService {
             // GPA 贡献 (0-4 → 0-2)
             score += (gpa / 4.0) * W_GPA;
 
-            // 考研分数贡献 (0-500 → 0-0.5)
+            // 考研分数贡献 (0-500 → 0-3.0)
             score += Math.min(studentScore / 500.0, 1.0) * W_SCORE;
 
-            // 导师热度贡献 (0-100 → 0-0.5)
-            double hotScore = tutor.getHotScore() > 0 ? tutor.getHotScore() : 50.0;
-            score += (hotScore / 100.0) * W_HOT;
-
             if (score > 0) {
-                list.add(new TutorScore(tutor, score, "基于专业、兴趣、GPA和导师热度的内容匹配推荐"));
+                list.add(new TutorScore(tutor, score, "基于专业、兴趣、GPA和考研成绩的内容匹配推荐"));
             }
         }
 
