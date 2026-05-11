@@ -76,8 +76,8 @@
                                     </select>
                                 </div>
                                 <div class=”form-group”>
-                                    <label>研究方向与自我描述<span class=”text-danger”>*</span></label>
-                                    <textarea class=”form-control” name=”interests” id=”interests” rows=”4” placeholder=”请描述你的研究兴趣、方向以及自我评价，系统将据此进行导师匹配”></textarea>
+                                    <label>感兴趣的研究方向<span class=”text-danger”>*</span></label>
+                                    <input type=”text” class=”form-control” name=”interests” id=”interests” placeholder=”如：推荐系统、机器学习、大数据”>
                                 </div>
                                 <div class=”form-group”>
                                     <label>成绩（0-100）</label>
@@ -134,7 +134,7 @@ $(function(){
     $('#registerForm').submit(function(e){
         var interests = $('#interests').val().trim();
         var phone = $('#phone').val().trim();
-        if (interests === '') { e.preventDefault(); showModal('注册错误', '请填写研究方向与自我描述'); return; }
+        if (interests === '') { e.preventDefault(); showModal('注册错误', '请填写感兴趣的研究方向'); return; }
         if (phone === '') { e.preventDefault(); showModal('注册错误', '联系电话不能为空'); return; }
         var score = $('input[name=”score”]').val();
         if (score !== '' && (isNaN(score) || score < 0 || score > 100)) { e.preventDefault(); showModal('注册错误', '成绩请输入0-100的数值'); return; }

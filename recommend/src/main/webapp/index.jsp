@@ -47,7 +47,7 @@
                         <div class="panel panel-success">
                             <div class="panel-heading">偏好与联系信息</div>
                             <div class="panel-body">
-                                <div class="form-group"><label>研究方向与自我描述</label><textarea class="form-control" name="interests" id="interests" rows="4" placeholder="请描述你的研究兴趣、方向以及自我评价，系统将据此进行导师匹配" required></textarea></div>
+                                <div class="form-group"><label>感兴趣的研究方向</label><input class="form-control" name="interests" id="interests" placeholder="如：推荐系统、机器学习、大数据" required></div>
                                 <div class="form-group"><label>成绩（分数）</label><input class="form-control" type="number" min="0" max="100" name="score" required></div>
                                 <div class="form-group"><label>联系电话</label><input class="form-control" name="phone" required></div>
                                 <div class="form-group"><label>邮箱</label><input class="form-control" type="email" name="email"></div>
@@ -76,7 +76,7 @@ $('#studentForm').submit(function(e){
     if (!grade){ e.preventDefault(); $('#errorMsg').text('年级不能为空'); return; }
     if (isNaN(gpa) || gpa < 0 || gpa > 4){ e.preventDefault(); $('#errorMsg').text('绩点必须在0-4之间'); return; }
     if (!phone){ e.preventDefault(); $('#errorMsg').text('联系电话不能为空'); return; }
-    if (!interests){ e.preventDefault(); $('#errorMsg').text('请填写研究方向与自我描述'); return; }
+    if (!interests){ e.preventDefault(); $('#errorMsg').text('请填写感兴趣的研究方向'); return; }
     $('#submitBtn').prop('disabled', true).text('提交中...');
 });
 </script>
