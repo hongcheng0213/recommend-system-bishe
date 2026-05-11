@@ -51,19 +51,11 @@
                                         <option value=””>请选择</option>
                                         <option value=”男”>男</option>
                                         <option value=”女”>女</option>
-                                        <option value=”其他”>其他</option>
                                     </select>
                                 </div>
                                 <div class=”form-group”>
                                     <label>专业</label>
-                                    <select class=”form-control” name=”major”>
-                                        <option value=””>请选择专业</option>
-                                        <option>计算机科学与技术</option>
-                                        <option>软件工程</option>
-                                        <option>电子信息工程</option>
-                                        <option>自动化</option>
-                                        <option>数据科学与大数据技术</option>
-                                    </select>
+                                    <input type=”text” class=”form-control” name=”major” placeholder=”请输入专业”>
                                 </div>
                             </div>
                         </div>
@@ -84,15 +76,8 @@
                                     </select>
                                 </div>
                                 <div class=”form-group”>
-                                    <label>研究方向<span class=”text-danger”>*</span></label>
-                                    <select class=”form-control” name=”interests” id=”researchDirection”>
-                                        <option value=””>请选择研究方向</option>
-                                        <option>推荐系统</option>
-                                        <option>机器学习</option>
-                                        <option>大数据</option>
-                                        <option>计算机视觉</option>
-                                        <option>自然语言处理</option>
-                                    </select>
+                                    <label>研究方向与自我描述<span class=”text-danger”>*</span></label>
+                                    <textarea class=”form-control” name=”interests” id=”interests” rows=”4” placeholder=”请描述你的研究兴趣、方向以及自我评价，系统将据此进行导师匹配”></textarea>
                                 </div>
                                 <div class=”form-group”>
                                     <label>成绩（0-100）</label>
@@ -147,9 +132,9 @@
 <script>
 $(function(){
     $('#registerForm').submit(function(e){
-        var direction = $('#researchDirection').val();
+        var interests = $('#interests').val().trim();
         var phone = $('#phone').val().trim();
-        if (direction === '') { e.preventDefault(); showModal('注册错误', '请选择研究方向'); return; }
+        if (interests === '') { e.preventDefault(); showModal('注册错误', '请填写研究方向与自我描述'); return; }
         if (phone === '') { e.preventDefault(); showModal('注册错误', '联系电话不能为空'); return; }
         var score = $('input[name=”score”]').val();
         if (score !== '' && (isNaN(score) || score < 0 || score > 100)) { e.preventDefault(); showModal('注册错误', '成绩请输入0-100的数值'); return; }

@@ -36,8 +36,8 @@
                             <div class="panel-body">
                                 <div class="form-group"><label>姓名</label><input class="form-control" name="name" required></div>
                                 <div class="form-group"><label>密码</label><input type="password" class="form-control" name="password" required></div>
-                                <div class="form-group"><label>性别</label><select class="form-control" name="gender"><option value="">请选择</option><option>男</option><option>女</option><option>其他</option></select></div>
-                                <div class="form-group"><label>专业</label><select class="form-control" name="major"><option value="">请选择</option><option>计算机科学与技术</option><option>软件工程</option><option>电子信息工程</option><option>自动化</option></select></div>
+                                <div class="form-group"><label>性别</label><select class="form-control" name="gender"><option value="">请选择</option><option>男</option><option>女</option></select></div>
+                                <div class="form-group"><label>专业</label><input class="form-control" name="major" placeholder="请输入专业"></div>
                                 <div class="form-group"><label>年级</label><input class="form-control" name="grade" required></div>
                                 <div class="form-group"><label>绩点 (GPA)</label><input class="form-control" type="number" step="0.01" min="0" max="4" name="gpa" required></div>
                             </div>
@@ -47,7 +47,7 @@
                         <div class="panel panel-success">
                             <div class="panel-heading">偏好与联系信息</div>
                             <div class="panel-body">
-                                <div class="form-group"><label>研究方向</label><select class="form-control" name="interests" id="interests" required><option value="">请选择</option><option>推荐系统</option><option>大数据</option><option>人工智能</option><option>信号处理</option><option>自然语言处理</option></select></div>
+                                <div class="form-group"><label>研究方向与自我描述</label><textarea class="form-control" name="interests" id="interests" rows="4" placeholder="请描述你的研究兴趣、方向以及自我评价，系统将据此进行导师匹配" required></textarea></div>
                                 <div class="form-group"><label>成绩（分数）</label><input class="form-control" type="number" min="0" max="100" name="score" required></div>
                                 <div class="form-group"><label>联系电话</label><input class="form-control" name="phone" required></div>
                                 <div class="form-group"><label>邮箱</label><input class="form-control" type="email" name="email"></div>
@@ -72,11 +72,11 @@ $('#studentForm').submit(function(e){
     var grade = $('input[name="grade"]').val().trim();
     var gpa = parseFloat($('input[name="gpa"]').val());
     var phone = $('input[name="phone"]').val().trim();
-    var direction = $('#interests').val();
+    var interests = $('#interests').val().trim();
     if (!grade){ e.preventDefault(); $('#errorMsg').text('年级不能为空'); return; }
     if (isNaN(gpa) || gpa < 0 || gpa > 4){ e.preventDefault(); $('#errorMsg').text('绩点必须在0-4之间'); return; }
     if (!phone){ e.preventDefault(); $('#errorMsg').text('联系电话不能为空'); return; }
-    if (!direction){ e.preventDefault(); $('#errorMsg').text('请选择研究方向'); return; }
+    if (!interests){ e.preventDefault(); $('#errorMsg').text('请填写研究方向与自我描述'); return; }
     $('#submitBtn').prop('disabled', true).text('提交中...');
 });
 </script>
