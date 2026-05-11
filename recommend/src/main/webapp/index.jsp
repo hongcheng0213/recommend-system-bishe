@@ -47,11 +47,10 @@
                         <div class="panel panel-success">
                             <div class="panel-heading">偏好与联系信息</div>
                             <div class="panel-body">
-                                <div class="form-group"><label>感兴趣的研究方向</label><input class="form-control" name="interests" id="interests" placeholder="如：推荐系统、机器学习、大数据" required></div>
                                 <div class="form-group"><label>成绩（分数）</label><input class="form-control" type="number" min="0" max="100" name="score" required></div>
                                 <div class="form-group"><label>联系电话</label><input class="form-control" name="phone" required></div>
                                 <div class="form-group"><label>邮箱</label><input class="form-control" type="email" name="email"></div>
-                                <div class="form-group"><label>自我描述</label><textarea class="form-control" name="description" rows="3"></textarea></div>
+                                <div class="form-group"><label>感兴趣的研究方向</label><textarea class="form-control" name="interests" id="interests" rows="4" placeholder="请描述你感兴趣的研究方向，系统将据此进行导师匹配" required></textarea></div>
                             </div>
                         </div>
                     </div>

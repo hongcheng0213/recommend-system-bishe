@@ -76,10 +76,6 @@
                                     </select>
                                 </div>
                                 <div class=”form-group”>
-                                    <label>感兴趣的研究方向<span class=”text-danger”>*</span></label>
-                                    <input type=”text” class=”form-control” name=”interests” id=”interests” placeholder=”如：推荐系统、机器学习、大数据”>
-                                </div>
-                                <div class=”form-group”>
                                     <label>成绩（0-100）</label>
                                     <input class=”form-control” type=”number” name=”score” min=”0” max=”100” placeholder=”如：85”>
                                 </div>
@@ -94,6 +90,10 @@
                                 <div class=”form-group”>
                                     <label>邮箱</label>
                                     <input class=”form-control” type=”email” name=”email” placeholder=”如：zhangsan@example.com”>
+                                </div>
+                                <div class=”form-group”>
+                                    <label>感兴趣的研究方向<span class=”text-danger”>*</span></label>
+                                    <textarea class=”form-control” name=”interests” id=”interests” rows=”4” placeholder=”请描述你感兴趣的研究方向，系统将据此进行导师匹配”></textarea>
                                 </div>
                             </div>
                         </div>
