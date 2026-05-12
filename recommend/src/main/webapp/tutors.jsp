@@ -95,17 +95,19 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
 <script>
+function isBoundary(ch) {
+    return !ch || ch === ' ' || ch === '\t' || ch === '\n' || ch === '\r';
+}
 var originalRows = [];
 $(function(){
     originalRows = $('#tutorTable tbody tr').toArray();
 });
 
-function charMatch(query, text) {
-    var qi = 0;
-    for (var ti = 0; ti < text.length && qi < query.length; ti++) {
-        if (text.charAt(ti) === query.charAt(qi)) qi++;
-    }
-    return qi === query.length;
+function fieldMatch(keyword, text) {
+    var idx = text.indexOf(keyword);
+    if (idx === -1) return false;
+    var next = text.charAt(idx + keyword.length);
+    return isBoundary(next);
 }
 
 function filterTutors() {
@@ -118,21 +120,24 @@ function filterTutors() {
         }
         return;
     }
-    var matched = [], unmatched = [];
+    // Split by spaces into tokens; rank by match count (most tokens matched = top)
+    var tokens = keyword.split(/\s+/);
+    var scored = [];
     for (var i = 0; i < rows.length; i++) {
         var text = $(rows[i]).data('search').toLowerCase();
-        if (charMatch(keyword, text)) {
-            matched.push(rows[i]);
-        } else {
-            unmatched.push(rows[i]);
+        var cnt = 0;
+        for (var t = 0; t < tokens.length; t++) {
+            if (fieldMatch(tokens[t], text)) cnt++;
         }
+        scored.push({row: rows[i], score: cnt, orig: i});
     }
+    scored.sort(function(a, b) {
+        if (a.score !== b.score) return b.score - a.score; // higher score first
+        return a.orig - b.orig; // then original order
+    });
     var tbody = $('#tutorTable tbody');
-    for (var j = 0; j < matched.length; j++) {
-        tbody.append(matched[j]);
-    }
-    for (var k = 0; k < unmatched.length; k++) {
-        tbody.append(unmatched[k]);
+    for (var j = 0; j < scored.length; j++) {
+        tbody.append(scored[j].row);
     }
 }
 </script>
