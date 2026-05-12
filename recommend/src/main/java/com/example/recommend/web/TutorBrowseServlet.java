@@ -57,7 +57,7 @@ public class TutorBrowseServlet extends HttpServlet {
 
         // 分页
         int page = 1;
-        int pageSize = 6;
+        int pageSize = 12;
         try {
             String pageStr = req.getParameter("page");
             if (pageStr != null) page = Integer.parseInt(pageStr);
