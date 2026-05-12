@@ -1,0 +1,94 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "导师推荐系统" [ref=e5] [cursor=pointer]:
+        - /url: /tutor-recommendation/student/home
+      - list [ref=e7]:
+        - listitem [ref=e8]:
+          - link "首页" [ref=e9] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/home
+        - listitem [ref=e10]:
+          - link "导师打分" [ref=e11] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/tutors
+        - listitem [ref=e12]:
+          - link "推荐结果" [ref=e13] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/recommend
+        - listitem [ref=e14]:
+          - link "导师浏览" [ref=e15] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/tutorBrowse
+        - listitem [ref=e16]:
+          - link "退出登录" [ref=e17] [cursor=pointer]:
+            - /url: /tutor-recommendation/logout
+  - generic [ref=e18]:
+    - heading "推荐结果" [level=3] [ref=e20]
+    - table [ref=e22]:
+      - rowgroup [ref=e23]:
+        - row "排名 导师 职称 学院 研究方向 招生名额 研究成果 匹配分 推荐理由" [ref=e24]:
+          - columnheader "排名" [ref=e25]
+          - columnheader "导师" [ref=e26]
+          - columnheader "职称" [ref=e27]
+          - columnheader "学院" [ref=e28]
+          - columnheader "研究方向" [ref=e29]
+          - columnheader "招生名额" [ref=e30]
+          - columnheader "研究成果" [ref=e31]
+          - columnheader "匹配分" [ref=e32]
+          - columnheader "推荐理由" [ref=e33]
+      - rowgroup [ref=e34]:
+        - row "1 谷延锋 教授 电子与信息工程学院 空天智能信息处理，高光谱遥感，多维度信息探测与处理系统 10 主持国家自然科学基金委重点国际合作项目、重大科学仪器研制项目，国家部委重点项目课题等 1.00 基于专业、兴趣、GPA和考研成绩的内容匹配推荐" [ref=e35]:
+          - cell "1" [ref=e36]
+          - cell "谷延锋" [ref=e37]
+          - cell "教授" [ref=e38]
+          - cell "电子与信息工程学院" [ref=e39]
+          - cell "空天智能信息处理，高光谱遥感，多维度信息探测与处理系统" [ref=e40]
+          - cell "10" [ref=e41]
+          - cell "主持国家自然科学基金委重点国际合作项目、重大科学仪器研制项目，国家部委重点项目课题等" [ref=e42]
+          - cell "1.00" [ref=e43]:
+            - generic [ref=e45]: "1.00"
+          - cell "基于专业、兴趣、GPA和考研成绩的内容匹配推荐" [ref=e46]
+        - row "2 李杨 教授 电子与信息工程学院 认知雷达系统，智能信号处理，分布式组网协同探测与雷达电子对抗系统理论 4 长期致力于新体制雷达系统理论与智能信号处理关键技术研究 0.78 基于专业、兴趣、GPA和考研成绩的内容匹配推荐" [ref=e47]:
+          - cell "2" [ref=e48]
+          - cell "李杨" [ref=e49]
+          - cell "教授" [ref=e50]
+          - cell "电子与信息工程学院" [ref=e51]
+          - cell "认知雷达系统，智能信号处理，分布式组网协同探测与雷达电子对抗系统理论" [ref=e52]
+          - cell "4" [ref=e53]
+          - cell "长期致力于新体制雷达系统理论与智能信号处理关键技术研究" [ref=e54]
+          - cell "0.78" [ref=e55]:
+            - generic [ref=e57]: "0.78"
+          - cell "基于专业、兴趣、GPA和考研成绩的内容匹配推荐" [ref=e58]
+        - row "3 刘大同 教授 电子与信息工程学院 复杂系统智能感知，系统状态监测与健康管理，自主无人系统试验与评估 5 学术专著 学术专著 学术著作：锂离子电池状态监测与状态估计，数据驱动的故障预测等 0.58 基于内容匹配(60%)与相似学生评分(40%)的混合推荐" [ref=e59]:
+          - cell "3" [ref=e60]
+          - cell "刘大同" [ref=e61]
+          - cell "教授" [ref=e62]
+          - cell "电子与信息工程学院" [ref=e63]
+          - cell "复杂系统智能感知，系统状态监测与健康管理，自主无人系统试验与评估" [ref=e64]
+          - cell "5" [ref=e65]
+          - cell "学术专著 学术专著 学术著作：锂离子电池状态监测与状态估计，数据驱动的故障预测等" [ref=e66]
+          - cell "0.58" [ref=e67]:
+            - generic [ref=e69]: "0.58"
+          - cell "基于内容匹配(60%)与相似学生评分(40%)的混合推荐" [ref=e70]
+        - row "4 王轩 教授 计算机科学与技术学院 人工智能，博弈决策，量子计算 2 高效非完全信息对抗性团队博弈求解算法研究，人工智能赋能重大应用等 0.55 基于内容匹配(60%)与相似学生评分(40%)的混合推荐" [ref=e71]:
+          - cell "4" [ref=e72]
+          - cell "王轩" [ref=e73]
+          - cell "教授" [ref=e74]
+          - cell "计算机科学与技术学院" [ref=e75]
+          - cell "人工智能，博弈决策，量子计算" [ref=e76]
+          - cell "2" [ref=e77]
+          - cell "高效非完全信息对抗性团队博弈求解算法研究，人工智能赋能重大应用等" [ref=e78]
+          - cell "0.55" [ref=e79]:
+            - generic [ref=e81]: "0.55"
+          - cell "基于内容匹配(60%)与相似学生评分(40%)的混合推荐" [ref=e82]
+        - row "5 张加佳 教授 计算机科学与技术学院 计算机博弈决策，金融科技，多智能体群体智能 3 致力于计算机博弈决策、多智能体群体智能、经济金融决策方向的研究工作。 0.54 基于内容匹配(60%)与相似学生评分(40%)的混合推荐" [ref=e83]:
+          - cell "5" [ref=e84]
+          - cell "张加佳" [ref=e85]
+          - cell "教授" [ref=e86]
+          - cell "计算机科学与技术学院" [ref=e87]
+          - cell "计算机博弈决策，金融科技，多智能体群体智能" [ref=e88]
+          - cell "3" [ref=e89]
+          - cell "致力于计算机博弈决策、多智能体群体智能、经济金融决策方向的研究工作。" [ref=e90]
+          - cell "0.54" [ref=e91]:
+            - generic [ref=e93]: "0.54"
+          - cell "基于内容匹配(60%)与相似学生评分(40%)的混合推荐" [ref=e94]
+    - link "返回首页" [ref=e95] [cursor=pointer]:
+      - /url: /tutor-recommendation/student/home
+  - contentinfo [ref=e96]: 本科生-研究生导师推荐系统

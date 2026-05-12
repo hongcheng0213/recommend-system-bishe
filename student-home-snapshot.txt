@@ -1,0 +1,88 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link " 导师推荐系统" [ref=e5] [cursor=pointer]:
+        - /url: /tutor-recommendation/student/home
+        - generic [ref=e6]: 
+        - text: 导师推荐系统
+      - list [ref=e8]:
+        - listitem [ref=e9]:
+          - link "首页" [ref=e10] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/home
+        - listitem [ref=e11]:
+          - link "意向导师" [ref=e12] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/tutors
+        - listitem [ref=e13]:
+          - link "推荐结果" [ref=e14] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/recommend
+        - listitem [ref=e15]:
+          - link "导师浏览" [ref=e16] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/tutorBrowse
+        - listitem [ref=e17]:
+          - link "退出登录" [ref=e18] [cursor=pointer]:
+            - /url: /tutor-recommendation/logout
+  - generic [ref=e19]:
+    - generic [ref=e20]:
+      - heading " 欢迎回来，学生12" [level=3] [ref=e21]:
+        - generic [ref=e22]: 
+        - text: 欢迎回来，学生12
+      - paragraph [ref=e23]: 软件工程 · 大四
+    - generic [ref=e24]:
+      - link " 意向导师 选择心仪导师" [ref=e25] [cursor=pointer]:
+        - /url: /tutor-recommendation/student/tutors
+        - generic [ref=e27]: 
+        - generic [ref=e28]: 意向导师
+        - generic [ref=e29]: 选择心仪导师
+      - link " 推荐结果 查看智能推荐" [ref=e30] [cursor=pointer]:
+        - /url: /tutor-recommendation/student/recommend
+        - generic [ref=e32]: 
+        - generic [ref=e33]: 推荐结果
+        - generic [ref=e34]: 查看智能推荐
+      - link " 导师浏览 浏览全部导师" [ref=e35] [cursor=pointer]:
+        - /url: /tutor-recommendation/student/tutorBrowse
+        - generic [ref=e37]: 
+        - generic [ref=e38]: 导师浏览
+        - generic [ref=e39]: 浏览全部导师
+    - generic [ref=e40]:
+      - generic [ref=e41]:
+        - generic [ref=e42]:
+          - generic [ref=e43]: 
+          - text: 基本信息
+        - table [ref=e44]:
+          - rowgroup [ref=e45]:
+            - row "姓名 学生12" [ref=e46]:
+              - cell "姓名" [ref=e47]
+              - cell "学生12" [ref=e48]:
+                - strong [ref=e49]: 学生12
+            - row "性别 女" [ref=e50]:
+              - cell "性别" [ref=e51]
+              - cell "女" [ref=e52]
+            - row "专业 软件工程" [ref=e53]:
+              - cell "专业" [ref=e54]
+              - cell "软件工程" [ref=e55]
+            - row "年级 大四" [ref=e56]:
+              - cell "年级" [ref=e57]
+              - cell "大四" [ref=e58]
+            - row "研究方向 空天智能信息处理，高光谱遥感，认知雷达系统" [ref=e59]:
+              - cell "研究方向" [ref=e60]
+              - cell "空天智能信息处理，高光谱遥感，认知雷达系统" [ref=e61]
+            - row "考研分数 355" [ref=e62]:
+              - cell "考研分数" [ref=e63]
+              - cell "355" [ref=e64]
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - generic [ref=e67]: 
+          - text: 扩展信息
+        - table [ref=e68]:
+          - rowgroup [ref=e69]:
+            - row "GPA 3.50" [ref=e70]:
+              - cell "GPA" [ref=e71]
+              - cell "3.50" [ref=e72]
+            - row "电话 13800138012" [ref=e73]:
+              - cell "电话" [ref=e74]
+              - cell "13800138012" [ref=e75]
+            - row "邮箱 s12@example.com" [ref=e76]:
+              - cell "邮箱" [ref=e77]
+              - cell "s12@example.com" [ref=e78]
+  - contentinfo [ref=e79]:
+    - generic [ref=e80]: 本科生—研究生导师推荐系统

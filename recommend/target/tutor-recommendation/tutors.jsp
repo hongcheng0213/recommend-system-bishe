@@ -44,25 +44,39 @@
         <% if (tutors == null || tutors.isEmpty()) { %>
             <div class="alert alert-warning">当前没有导师数据，请先在数据库中插入导师记录。</div>
         <% } else { %>
+            <div class="form-group" style="margin-bottom:15px;">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                    <input type="text" id="searchBox" class="form-control" placeholder="搜索导师（姓名/院校/院系/研究方向）" oninput="filterTutors()">
+                </div>
+            </div>
             <form method="post" action="${pageContext.request.contextPath}/student/rate">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead><tr><th>编号</th><th>姓名</th><th>学院</th><th>研究方向</th><th>招生名额</th><th>意向程度</th></tr></thead>
+                    <table class="table table-bordered table-hover" id="tutorTable">
+                        <thead><tr><th>编号</th><th>姓名</th><th>院校</th><th>学院</th><th>研究方向</th><th>招生名额</th><th>意向程度</th></tr></thead>
                         <tbody>
                         <% for (Tutor t : tutors) {
                                Object r = ratingMap.get(t.getId());
-                               double selectedScore = (r instanceof Number) ? ((Number) r).doubleValue() : 3.0;
+                               double selectedScore = (r instanceof Number) ? ((Number) r).doubleValue() : -1;
                         %>
-                            <tr>
+                            <tr data-search="<%= t.getName().replace("\"", "") %> <%= t.getUniversity() != null ? t.getUniversity().replace("\"", "") : "" %> <%= t.getDepartment() != null ? t.getDepartment().replace("\"", "") : "" %> <%= t.getResearchFields() != null ? t.getResearchFields().replace("\"", "") : "" %>">
                                 <td><%= t.getId() %></td>
-                                <td><%= t.getName() %></td>
-                                <td><%= t.getDepartment() %></td>
-                                <td><%= t.getResearchFields() %></td>
+                                <td class="tutor-name">
+                                    <% if (t.getHomepageUrl() != null && !t.getHomepageUrl().isEmpty()) { %>
+                                        <a href="<%= t.getHomepageUrl() %>" target="_blank" rel="noopener noreferrer"><%= t.getName() %></a>
+                                    <% } else { %>
+                                        <%= t.getName() %>
+                                    <% } %>
+                                </td>
+                                <td><%= t.getUniversity() != null ? t.getUniversity() : "-" %></td>
+                                <td><%= t.getDepartment() != null ? t.getDepartment() : "-" %></td>
+                                <td><%= t.getResearchFields() != null ? t.getResearchFields() : "-" %></td>
                                 <td><%= t.getQuota() %></td>
                                 <td>
-                                    <select name="score_<%= t.getId() %>" class="form-control input-sm" style="width:80px; display:inline-block;">
+                                    <select name="score_<%= t.getId() %>" class="form-control input-sm" style="width:90px; display:inline-block;">
+                                        <option value="">未评分</option>
                                     <% for (int i = 1; i <= 5; i++) { %>
-                                        <option value="<%= i %>" <%= (int) selectedScore == i ? "selected" : "" %>><%= i %></option>
+                                        <option value="<%= i %>" <%= (int) selectedScore == i ? "selected" : "" %>><%= i %>分</option>
                                     <% } %>
                                     </select>
                                 </td>
@@ -80,6 +94,71 @@
 <footer class="footer text-center">本科生-研究生导师推荐系统</footer>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+<script>
+var originalRows = [];
+$(function(){
+    originalRows = $('#tutorTable tbody tr').toArray();
+});
+
+function charMatch(keyword, text) {
+    var qi = 0;
+    for (var ti = 0; ti < text.length && qi < keyword.length; ti++) {
+        if (text.charAt(ti) === keyword.charAt(qi)) qi++;
+    }
+    return qi === keyword.length;
+}
+
+// Score a single token against a row's search text
+// 3=exact field match, 2=field starts with, 1=contains, 0=subsequence, -1=no match
+function tokenScore(keyword, text) {
+    var fields = text.split(' ');
+    var best = -1;
+    for (var f = 0; f < fields.length; f++) {
+        var pos = fields[f].indexOf(keyword);
+        if (pos === 0 && fields[f].length === keyword.length) {
+            best = Math.max(best, 3); // exact field match
+        } else if (pos === 0) {
+            best = Math.max(best, 2); // field starts with keyword
+        } else if (pos > 0) {
+            best = Math.max(best, 1); // field contains keyword
+        }
+    }
+    if (best >= 0) return best;
+    return charMatch(keyword, text) ? 0 : -1;
+}
+
+function filterTutors() {
+    var keyword = $.trim($('#searchBox').val()).toLowerCase();
+    var rows = $('#tutorTable tbody tr').toArray();
+    if (!keyword) {
+        var tbody = $('#tutorTable tbody');
+        for (var i = 0; i < originalRows.length; i++) {
+            tbody.append(originalRows[i]);
+        }
+        return;
+    }
+    // Split by spaces into tokens; rank by match count (most tokens matched = top)
+    var tokens = keyword.split(/\s+/);
+    var scored = [];
+    for (var i = 0; i < rows.length; i++) {
+        var text = $(rows[i]).data('search').toLowerCase();
+        var total = 0;
+        for (var t = 0; t < tokens.length; t++) {
+            var s = tokenScore(tokens[t], text);
+            if (s >= 0) total += s;
+        }
+        scored.push({row: rows[i], score: total, orig: i});
+    }
+    scored.sort(function(a, b) {
+        if (a.score !== b.score) return b.score - a.score;
+        return a.orig - b.orig;
+    });
+    var tbody = $('#tutorTable tbody');
+    for (var j = 0; j < scored.length; j++) {
+        tbody.append(scored[j].row);
+    }
+}
+</script>
 </body>
 </html>
 

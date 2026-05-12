@@ -1,0 +1,298 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link " 导师推荐系统" [ref=e5] [cursor=pointer]:
+        - /url: /tutor-recommendation/student/home
+        - generic [ref=e6]: 
+        - text: 导师推荐系统
+      - list [ref=e8]:
+        - listitem [ref=e9]:
+          - link "首页" [ref=e10] [cursor=pointer]:
+            - /url: /tutor-recommendation/student/home
+        - listitem [ref=e11]:
+          - link "管理员" [ref=e12] [cursor=pointer]:
+            - /url: /tutor-recommendation/admin
+        - listitem [ref=e13]:
+          - link "退出登录" [ref=e14] [cursor=pointer]:
+            - /url: /tutor-recommendation/logout
+  - generic [ref=e15]:
+    - text: 
+    - generic [ref=e16]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - heading " 导师基础信息" [level=3] [ref=e20]:
+            - generic [ref=e21]: 
+            - text: 导师基础信息
+          - button " 新增导师" [ref=e22] [cursor=pointer]:
+            - generic [ref=e23]: 
+            - text: 新增导师
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - generic [ref=e27]: 选择导师编辑
+            - combobox [ref=e28]:
+              - option "-- 选择已有导师 / 或点击「新增导师」--" [selected]
+              - option "张加佳 [计算机科学与技术学院]"
+              - option "王轩 [计算机科学与技术学院]"
+              - option "廖清 [计算机科学与技术学院]"
+              - option "马琮淦 [汽车工程学院]"
+              - option "李俊夫 [汽车工程学院]"
+              - option "刘逸群 [汽车工程学院]"
+              - option "谷延锋 [电子与信息工程学院]"
+              - option "李杨 [电子与信息工程学院]"
+              - option "刘大同 [电子与信息工程学院]"
+              - option "黄永江 [材料科学与工程学院]"
+              - option "黄陆军 [材料科学与工程学院]"
+              - option "田艳红 [材料科学与工程学院]"
+          - generic [ref=e29]:
+            - generic [ref=e31]:
+              - generic [ref=e32]: 姓名 *
+              - textbox [ref=e33]
+            - generic [ref=e35]:
+              - generic [ref=e36]: 性别
+              - combobox [ref=e37]:
+                - option "请选择" [selected]
+                - option "男"
+                - option "女"
+          - generic [ref=e38]:
+            - generic [ref=e40]:
+              - generic [ref=e41]: 院校
+              - textbox [ref=e42]
+            - generic [ref=e44]:
+              - generic [ref=e45]: 院系
+              - textbox [ref=e46]
+          - generic [ref=e47]:
+            - generic [ref=e48]: 研究方向
+            - textbox [ref=e49]
+          - generic [ref=e50]:
+            - generic [ref=e51]: 招生名额
+            - spinbutton [ref=e52]
+          - generic [ref=e53]:
+            - generic [ref=e54]: 照片URL
+            - generic [ref=e55]:
+              - textbox "https://example.com/photo.jpg" [ref=e56]
+              - button "" [ref=e58] [cursor=pointer]:
+                - generic [ref=e59]: 
+          - generic [ref=e60]:
+            - generic [ref=e61]: 主页URL
+            - textbox "https://..." [ref=e62]
+          - button " 保存基础信息" [ref=e63] [cursor=pointer]:
+            - generic [ref=e64]: 
+            - text: 保存基础信息
+      - generic [ref=e66]:
+        - heading " 导师扩展信息" [level=3] [ref=e68]:
+          - generic [ref=e69]: 
+          - text: 导师扩展信息
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - generic [ref=e73]: 选择导师
+            - combobox [ref=e74]:
+              - option "请选择导师" [selected]
+              - option "张加佳 [计算机科学与技术学院]"
+              - option "王轩 [计算机科学与技术学院]"
+              - option "廖清 [计算机科学与技术学院]"
+              - option "马琮淦 [汽车工程学院]"
+              - option "李俊夫 [汽车工程学院]"
+              - option "刘逸群 [汽车工程学院]"
+              - option "谷延锋 [电子与信息工程学院]"
+              - option "李杨 [电子与信息工程学院]"
+              - option "刘大同 [电子与信息工程学院]"
+              - option "黄永江 [材料科学与工程学院]"
+              - option "黄陆军 [材料科学与工程学院]"
+              - option "田艳红 [材料科学与工程学院]"
+          - generic [ref=e75]:
+            - generic [ref=e76]: 职称
+            - textbox "如：教授" [ref=e77]
+          - generic [ref=e78]:
+            - generic [ref=e79]: 研究成果
+            - textbox [ref=e80]
+          - generic [ref=e81]:
+            - generic [ref=e82]: 招生名额
+            - spinbutton [ref=e83]: "3"
+          - button " 保存扩展信息" [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]: 
+            - text: 保存扩展信息
+    - generic [ref=e88]:
+      - heading " 当前导师列表" [level=3] [ref=e90]:
+        - generic [ref=e91]: 
+        - text: 当前导师列表
+      - table [ref=e93]:
+        - rowgroup [ref=e94]:
+          - row "ID 姓名 院系 院校 职称 招生名额 照片 主页" [ref=e95]:
+            - columnheader "ID" [ref=e96]
+            - columnheader "姓名" [ref=e97]
+            - columnheader "院系" [ref=e98]
+            - columnheader "院校" [ref=e99]
+            - columnheader "职称" [ref=e100]
+            - columnheader "招生名额" [ref=e101]
+            - columnheader "照片" [ref=e102]
+            - columnheader "主页" [ref=e103]
+        - rowgroup [ref=e104]:
+          - row "1 张加佳 计算机科学与技术学院 哈尔滨工业大学（深圳） 教授 3 查看 " [ref=e105]:
+            - cell "1" [ref=e106]
+            - cell "张加佳" [ref=e107]
+            - cell "计算机科学与技术学院" [ref=e108]
+            - cell "哈尔滨工业大学（深圳）" [ref=e109]
+            - cell "教授" [ref=e110]
+            - cell "3" [ref=e111]
+            - cell "查看" [ref=e112]:
+              - link "查看" [ref=e113] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=c805f7853a1b49e081a8139a9e5c5114&&w=200&&h=204&&1773938230824
+            - cell "" [ref=e114]:
+              - link "" [ref=e115] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/zhangjiajia"
+                - generic [ref=e116]: 
+          - row "2 王轩 计算机科学与技术学院 哈尔滨工业大学（深圳） 教授 2 查看 " [ref=e117]:
+            - cell "2" [ref=e118]
+            - cell "王轩" [ref=e119]
+            - cell "计算机科学与技术学院" [ref=e120]
+            - cell "哈尔滨工业大学（深圳）" [ref=e121]
+            - cell "教授" [ref=e122]
+            - cell "2" [ref=e123]
+            - cell "查看" [ref=e124]:
+              - link "查看" [ref=e125] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=43665e0363bd4f2d80e7b9fd4b84394e&&w=200&&h=204&&1773938978017
+            - cell "" [ref=e126]:
+              - link "" [ref=e127] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/wangxuan"
+                - generic [ref=e128]: 
+          - row "3 廖清 计算机科学与技术学院 哈尔滨工业大学（深圳） 教授 4 查看 " [ref=e129]:
+            - cell "3" [ref=e130]
+            - cell "廖清" [ref=e131]
+            - cell "计算机科学与技术学院" [ref=e132]
+            - cell "哈尔滨工业大学（深圳）" [ref=e133]
+            - cell "教授" [ref=e134]
+            - cell "4" [ref=e135]
+            - cell "查看" [ref=e136]:
+              - link "查看" [ref=e137] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=e5085ab0c8ed46d3a02ab9c36a8bf1ce&&w=200&&h=204&&1773939239046
+            - cell "" [ref=e138]:
+              - link "" [ref=e139] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/liaoqing"
+                - generic [ref=e140]: 
+          - row "4 马琮淦 汽车工程学院 哈尔滨工业大学（威海） 教授 4 查看 " [ref=e141]:
+            - cell "4" [ref=e142]
+            - cell "马琮淦" [ref=e143]
+            - cell "汽车工程学院" [ref=e144]
+            - cell "哈尔滨工业大学（威海）" [ref=e145]
+            - cell "教授" [ref=e146]
+            - cell "4" [ref=e147]
+            - cell "查看" [ref=e148]:
+              - link "查看" [ref=e149] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=f9dba155b64a43759791485fbc5407f5&&w=200&&h=204&&1773939439464
+            - cell "" [ref=e150]:
+              - link "" [ref=e151] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/maconggan"
+                - generic [ref=e152]: 
+          - row "5 李俊夫 汽车工程学院 哈尔滨工业大学（威海） 副教授，博导 3 查看 " [ref=e153]:
+            - cell "5" [ref=e154]
+            - cell "李俊夫" [ref=e155]
+            - cell "汽车工程学院" [ref=e156]
+            - cell "哈尔滨工业大学（威海）" [ref=e157]
+            - cell "副教授，博导" [ref=e158]
+            - cell "3" [ref=e159]
+            - cell "查看" [ref=e160]:
+              - link "查看" [ref=e161] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=83f89ce09bcb414c81baa5983aa3b49c&&w=200&&h=204&&1773939724761
+            - cell "" [ref=e162]:
+              - link "" [ref=e163] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/lijunfu"
+                - generic [ref=e164]: 
+          - row "6 刘逸群 汽车工程学院 哈尔滨工业大学（威海） 副教授 4 查看 " [ref=e165]:
+            - cell "6" [ref=e166]
+            - cell "刘逸群" [ref=e167]
+            - cell "汽车工程学院" [ref=e168]
+            - cell "哈尔滨工业大学（威海）" [ref=e169]
+            - cell "副教授" [ref=e170]
+            - cell "4" [ref=e171]
+            - cell "查看" [ref=e172]:
+              - link "查看" [ref=e173] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=76801aedf9804064a477b3e67b5e60b8&&w=200&&h=204&&1773939990736
+            - cell "" [ref=e174]:
+              - link "" [ref=e175] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/liuyiqun"
+                - generic [ref=e176]: 
+          - row "7 谷延锋 电子与信息工程学院 哈尔滨工业大学 教授 10 查看 " [ref=e177]:
+            - cell "7" [ref=e178]
+            - cell "谷延锋" [ref=e179]
+            - cell "电子与信息工程学院" [ref=e180]
+            - cell "哈尔滨工业大学" [ref=e181]
+            - cell "教授" [ref=e182]
+            - cell "10" [ref=e183]
+            - cell "查看" [ref=e184]:
+              - link "查看" [ref=e185] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=1163&&w=200&&h=204&&1773940414536
+            - cell "" [ref=e186]:
+              - link "" [ref=e187] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/guyf"
+                - generic [ref=e188]: 
+          - row "8 李杨 电子与信息工程学院 哈尔滨工业大学 教授 4 查看 " [ref=e189]:
+            - cell "8" [ref=e190]
+            - cell "李杨" [ref=e191]
+            - cell "电子与信息工程学院" [ref=e192]
+            - cell "哈尔滨工业大学" [ref=e193]
+            - cell "教授" [ref=e194]
+            - cell "4" [ref=e195]
+            - cell "查看" [ref=e196]:
+              - link "查看" [ref=e197] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=569&&w=200&&h=204&&1773940616097
+            - cell "" [ref=e198]:
+              - link "" [ref=e199] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/liyang"
+                - generic [ref=e200]: 
+          - row "9 刘大同 电子与信息工程学院 哈尔滨工业大学 教授 5 查看 " [ref=e201]:
+            - cell "9" [ref=e202]
+            - cell "刘大同" [ref=e203]
+            - cell "电子与信息工程学院" [ref=e204]
+            - cell "哈尔滨工业大学" [ref=e205]
+            - cell "教授" [ref=e206]
+            - cell "5" [ref=e207]
+            - cell "查看" [ref=e208]:
+              - link "查看" [ref=e209] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=587&&w=200&&h=204&&1773940750770
+            - cell "" [ref=e210]:
+              - link "" [ref=e211] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/liudatong"
+                - generic [ref=e212]: 
+          - row "10 黄永江 材料科学与工程学院 哈尔滨工业大学 教授 6 查看 " [ref=e213]:
+            - cell "10" [ref=e214]
+            - cell "黄永江" [ref=e215]
+            - cell "材料科学与工程学院" [ref=e216]
+            - cell "哈尔滨工业大学" [ref=e217]
+            - cell "教授" [ref=e218]
+            - cell "6" [ref=e219]
+            - cell "查看" [ref=e220]:
+              - link "查看" [ref=e221] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=1302&&w=200&&h=204&&1773943050746
+            - cell "" [ref=e222]:
+              - link "" [ref=e223] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/yjhuang"
+                - generic [ref=e224]: 
+          - row "11 黄陆军 材料科学与工程学院 哈尔滨工业大学 教授 10 查看 " [ref=e225]:
+            - cell "11" [ref=e226]
+            - cell "黄陆军" [ref=e227]
+            - cell "材料科学与工程学院" [ref=e228]
+            - cell "哈尔滨工业大学" [ref=e229]
+            - cell "教授" [ref=e230]
+            - cell "10" [ref=e231]
+            - cell "查看" [ref=e232]:
+              - link "查看" [ref=e233] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=774&&w=200&&h=204&&1773943230885
+            - cell "" [ref=e234]:
+              - link "" [ref=e235] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/huanglujun"
+                - generic [ref=e236]: 
+          - row "12 田艳红 材料科学与工程学院 哈尔滨工业大学 教授 4 查看 " [ref=e237]:
+            - cell "12" [ref=e238]
+            - cell "田艳红" [ref=e239]
+            - cell "材料科学与工程学院" [ref=e240]
+            - cell "哈尔滨工业大学" [ref=e241]
+            - cell "教授" [ref=e242]
+            - cell "4" [ref=e243]
+            - cell "查看" [ref=e244]:
+              - link "查看" [ref=e245] [cursor=pointer]:
+                - /url: https://homepage.hit.edu.cn/file/showHP.do?d=915&&w=200&&h=204&&1773943557091
+            - cell "" [ref=e246]:
+              - link "" [ref=e247] [cursor=pointer]:
+                - /url: " http://homepage.hit.edu.cn/tinatian"
+                - generic [ref=e248]: 
+  - contentinfo [ref=e249]: 本科生-研究生导师推荐系统
