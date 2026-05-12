@@ -44,20 +44,27 @@
         <% if (tutors == null || tutors.isEmpty()) { %>
             <div class="alert alert-warning">当前没有导师数据，请先在数据库中插入导师记录。</div>
         <% } else { %>
+            <div class="form-group" style="margin-bottom:15px;">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                    <input type="text" id="searchBox" class="form-control" placeholder="搜索导师（姓名/院校/院系/研究方向）" oninput="filterTutors()">
+                </div>
+            </div>
             <form method="post" action="${pageContext.request.contextPath}/student/rate">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead><tr><th>编号</th><th>姓名</th><th>学院</th><th>研究方向</th><th>招生名额</th><th>意向程度</th></tr></thead>
+                    <table class="table table-bordered table-hover" id="tutorTable">
+                        <thead><tr><th>编号</th><th>姓名</th><th>院校</th><th>学院</th><th>研究方向</th><th>招生名额</th><th>意向程度</th></tr></thead>
                         <tbody>
                         <% for (Tutor t : tutors) {
                                Object r = ratingMap.get(t.getId());
                                double selectedScore = (r instanceof Number) ? ((Number) r).doubleValue() : -1;
                         %>
-                            <tr>
+                            <tr data-search="<%= t.getName().replace("\"", "") %> <%= t.getUniversity() != null ? t.getUniversity().replace("\"", "") : "" %> <%= t.getDepartment() != null ? t.getDepartment().replace("\"", "") : "" %> <%= t.getResearchFields() != null ? t.getResearchFields().replace("\"", "") : "" %>">
                                 <td><%= t.getId() %></td>
-                                <td><%= t.getName() %></td>
-                                <td><%= t.getDepartment() %></td>
-                                <td><%= t.getResearchFields() %></td>
+                                <td class="tutor-name"><%= t.getName() %></td>
+                                <td><%= t.getUniversity() != null ? t.getUniversity() : "-" %></td>
+                                <td><%= t.getDepartment() != null ? t.getDepartment() : "-" %></td>
+                                <td><%= t.getResearchFields() != null ? t.getResearchFields() : "-" %></td>
                                 <td><%= t.getQuota() %></td>
                                 <td>
                                     <select name="score_<%= t.getId() %>" class="form-control input-sm" style="width:90px; display:inline-block;">
@@ -81,6 +88,41 @@
 <footer class="footer text-center">本科生-研究生导师推荐系统</footer>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+<script>
+var originalRows = [];
+$(function(){
+    originalRows = $('#tutorTable tbody tr').toArray();
+});
+
+function filterTutors() {
+    var keyword = $.trim($('#searchBox').val()).toLowerCase();
+    var rows = $('#tutorTable tbody tr').toArray();
+    if (!keyword) {
+        // Restore original order
+        var tbody = $('#tutorTable tbody');
+        for (var i = 0; i < originalRows.length; i++) {
+            tbody.append(originalRows[i]);
+        }
+        return;
+    }
+    var matched = [], unmatched = [];
+    for (var i = 0; i < rows.length; i++) {
+        var text = $(rows[i]).data('search').toLowerCase();
+        if (text.indexOf(keyword) !== -1) {
+            matched.push(rows[i]);
+        } else {
+            unmatched.push(rows[i]);
+        }
+    }
+    var tbody = $('#tutorTable tbody');
+    for (var j = 0; j < matched.length; j++) {
+        tbody.append(matched[j]);
+    }
+    for (var k = 0; k < unmatched.length; k++) {
+        tbody.append(unmatched[k]);
+    }
+}
+</script>
 </body>
 </html>
 
