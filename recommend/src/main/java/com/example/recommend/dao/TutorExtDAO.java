@@ -12,17 +12,16 @@ import java.util.List;
 
 public class TutorExtDAO {
     public boolean saveOrUpdate(TutorExt ext) {
-        String sql = "INSERT INTO tutor_ext(tutor_id, title, research_achievement, student_quota, hot_score) " +
-                     "VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE " +
+        String sql = "INSERT INTO tutor_ext(tutor_id, title, research_achievement, student_quota) " +
+                     "VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE " +
                      "title=VALUES(title), research_achievement=VALUES(research_achievement), " +
-                     "student_quota=VALUES(student_quota), hot_score=VALUES(hot_score)";
+                     "student_quota=VALUES(student_quota)";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, ext.getTutorId());
             ps.setString(2, ext.getTitle());
             ps.setString(3, ext.getResearchAchievement());
             ps.setInt(4, ext.getStudentQuota());
-            ps.setInt(5, ext.getHotScore());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -31,7 +30,7 @@ public class TutorExtDAO {
     }
 
     public TutorExt findByTutorId(int tutorId) {
-        String sql = "SELECT * FROM tutor_ext WHERE tutor_id = ?";
+        String sql = "SELECT tutor_id, title, research_achievement, student_quota FROM tutor_ext WHERE tutor_id = ?";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, tutorId);
@@ -42,7 +41,6 @@ public class TutorExtDAO {
                 ext.setTitle(rs.getString("title"));
                 ext.setResearchAchievement(rs.getString("research_achievement"));
                 ext.setStudentQuota(rs.getInt("student_quota"));
-                ext.setHotScore(rs.getInt("hot_score"));
                 return ext;
             }
         } catch (SQLException e) {
@@ -52,7 +50,7 @@ public class TutorExtDAO {
     }
 
     public List<TutorExt> findAll() {
-        String sql = "SELECT * FROM tutor_ext";
+        String sql = "SELECT tutor_id, title, research_achievement, student_quota FROM tutor_ext";
         List<TutorExt> list = new ArrayList<>();
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -63,7 +61,6 @@ public class TutorExtDAO {
                 ext.setTitle(rs.getString("title"));
                 ext.setResearchAchievement(rs.getString("research_achievement"));
                 ext.setStudentQuota(rs.getInt("student_quota"));
-                ext.setHotScore(rs.getInt("hot_score"));
                 list.add(ext);
             }
         } catch (SQLException e) {
