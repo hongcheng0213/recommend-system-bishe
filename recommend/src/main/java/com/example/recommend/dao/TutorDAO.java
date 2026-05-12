@@ -3,10 +3,7 @@ package com.example.recommend.dao;
 import com.example.recommend.config.DBUtil;
 import com.example.recommend.model.Tutor;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +11,7 @@ public class TutorDAO {
 
     public List<Tutor> findAll() {
         List<Tutor> list = new ArrayList<>();
-        String sql = "SELECT t.*, te.title, te.research_achievement, te.student_quota, te.hot_score " +
+        String sql = "SELECT t.*, te.title, te.research_achievement, te.student_quota " +
                 "FROM tutors t LEFT JOIN tutor_ext te ON t.id = te.tutor_id";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -29,7 +26,7 @@ public class TutorDAO {
     }
 
     public Tutor findById(int id) {
-        String sql = "SELECT t.*, te.title, te.research_achievement, te.student_quota, te.hot_score " +
+        String sql = "SELECT t.*, te.title, te.research_achievement, te.student_quota " +
                 "FROM tutors t LEFT JOIN tutor_ext te ON t.id = te.tutor_id WHERE t.id = ?";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -46,7 +43,7 @@ public class TutorDAO {
 
     public List<Tutor> findByFilter(String university, String department, String keyword) {
         List<Tutor> list = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("SELECT t.*, te.title, te.research_achievement, te.student_quota, te.hot_score " +
+        StringBuilder sql = new StringBuilder("SELECT t.*, te.title, te.research_achievement, te.student_quota " +
                 "FROM tutors t LEFT JOIN tutor_ext te ON t.id = te.tutor_id WHERE 1=1");
         List<Object> params = new ArrayList<>();
 
@@ -76,35 +73,27 @@ public class TutorDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-        // 对搜索结果进行过滤，确保只有完全匹配或包含完整关键词的结果被返回
+
         if (keyword != null && !keyword.isEmpty()) {
             List<Tutor> filteredList = new ArrayList<>();
             for (Tutor tutor : list) {
-                // 检查姓名是否完全匹配
                 if (keyword.equals(tutor.getName())) {
                     filteredList.add(tutor);
                 }
-                // 检查研究方向是否包含关键词
                 else if (tutor.getResearchFields() != null && tutor.getResearchFields().contains(keyword)) {
                     filteredList.add(tutor);
                 }
-                // 检查姓名是否包含关键词且不是作为其他词的前缀
                 else if (tutor.getName() != null && tutor.getName().contains(keyword)) {
-                    // 确保关键词在姓名中是一个完整的词
                     String name = tutor.getName();
                     int index = name.indexOf(keyword);
-                    // 检查关键词是否在开头且后面是边界
                     if (index == 0 && (name.length() == keyword.length() || !Character.isLetterOrDigit(name.charAt(index + keyword.length())))) {
                         filteredList.add(tutor);
                     }
-                    // 检查关键词是否在中间且前后都是边界
-                    else if (index > 0 && index + keyword.length() < name.length() && 
-                             !Character.isLetterOrDigit(name.charAt(index - 1)) && 
+                    else if (index > 0 && index + keyword.length() < name.length() &&
+                             !Character.isLetterOrDigit(name.charAt(index - 1)) &&
                              !Character.isLetterOrDigit(name.charAt(index + keyword.length()))) {
                         filteredList.add(tutor);
                     }
-                    // 检查关键词是否在结尾且前面是边界
                     else if (index + keyword.length() == name.length() && !Character.isLetterOrDigit(name.charAt(index - 1))) {
                         filteredList.add(tutor);
                     }
@@ -112,7 +101,7 @@ public class TutorDAO {
             }
             return filteredList;
         }
-        
+
         return list;
     }
 
@@ -152,6 +141,49 @@ public class TutorDAO {
         return departments;
     }
 
+    public int insert(Tutor t) {
+        String sql = "INSERT INTO tutors (name, gender, university, department, research_fields, quota, photo, homepage_url) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, t.getName());
+            ps.setString(2, t.getGender());
+            ps.setString(3, t.getUniversity());
+            ps.setString(4, t.getDepartment());
+            ps.setString(5, t.getResearchFields());
+            if (t.getQuota() > 0) ps.setInt(6, t.getQuota()); else ps.setNull(6, Types.INTEGER);
+            ps.setString(7, t.getPhoto());
+            ps.setString(8, t.getHomepageUrl());
+            ps.executeUpdate();
+            ResultSet keys = ps.getGeneratedKeys();
+            if (keys.next()) return keys.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public boolean update(Tutor t) {
+        String sql = "UPDATE tutors SET name=?, gender=?, university=?, department=?, " +
+                     "research_fields=?, quota=?, photo=?, homepage_url=? WHERE id=?";
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, t.getName());
+            ps.setString(2, t.getGender());
+            ps.setString(3, t.getUniversity());
+            ps.setString(4, t.getDepartment());
+            ps.setString(5, t.getResearchFields());
+            if (t.getQuota() > 0) ps.setInt(6, t.getQuota()); else ps.setNull(6, Types.INTEGER);
+            ps.setString(7, t.getPhoto());
+            ps.setString(8, t.getHomepageUrl());
+            ps.setInt(9, t.getId());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     private Tutor mapRow(ResultSet rs) throws SQLException {
         Tutor t = new Tutor();
         t.setId(rs.getInt("id"));
@@ -164,10 +196,8 @@ public class TutorDAO {
         t.setTitle(rs.getString("title"));
         t.setResearchAchievement(rs.getString("research_achievement"));
         t.setStudentQuota(rs.getInt("student_quota"));
-        t.setHotScore(rs.getInt("hot_score"));
         t.setPhoto(rs.getString("photo"));
         t.setHomepageUrl(rs.getString("homepage_url"));
         return t;
     }
 }
-
