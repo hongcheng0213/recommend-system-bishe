@@ -5,7 +5,6 @@ public class TutorExt {
     private String title;
     private String researchAchievement;
     private int studentQuota;
-    private int hotScore;
 
     public int getTutorId() {
         return tutorId;
@@ -37,13 +36,5 @@ public class TutorExt {
 
     public void setStudentQuota(int studentQuota) {
         this.studentQuota = studentQuota;
-    }
-
-    public int getHotScore() {
-        return hotScore;
-    }
-
-    public void setHotScore(int hotScore) {
-        this.hotScore = hotScore;
     }
 }
