@@ -61,7 +61,13 @@
                         %>
                             <tr data-search="<%= t.getName().replace("\"", "") %> <%= t.getUniversity() != null ? t.getUniversity().replace("\"", "") : "" %> <%= t.getDepartment() != null ? t.getDepartment().replace("\"", "") : "" %> <%= t.getResearchFields() != null ? t.getResearchFields().replace("\"", "") : "" %>">
                                 <td><%= t.getId() %></td>
-                                <td class="tutor-name"><%= t.getName() %></td>
+                                <td class="tutor-name">
+                                    <% if (t.getHomepageUrl() != null && !t.getHomepageUrl().isEmpty()) { %>
+                                        <a href="<%= t.getHomepageUrl() %>" target="_blank" rel="noopener noreferrer"><%= t.getName() %></a>
+                                    <% } else { %>
+                                        <%= t.getName() %>
+                                    <% } %>
+                                </td>
                                 <td><%= t.getUniversity() != null ? t.getUniversity() : "-" %></td>
                                 <td><%= t.getDepartment() != null ? t.getDepartment() : "-" %></td>
                                 <td><%= t.getResearchFields() != null ? t.getResearchFields() : "-" %></td>
