@@ -26,7 +26,7 @@ public class AuthFilter implements Filter {
         HttpSession session = req.getSession(false);
 
         if (session == null || session.getAttribute("studentId") == null) {
-            resp.sendRedirect(req.getContextPath() + "/login.jsp");
+            resp.sendRedirect(req.getContextPath() + "/admin_login.jsp");
             return;
         }
 

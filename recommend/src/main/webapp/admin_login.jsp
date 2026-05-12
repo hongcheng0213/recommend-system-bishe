@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>导师推荐系统 - 登录</title>
+    <title>导师推荐系统 - 管理员登录</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
@@ -22,9 +22,9 @@
         </div>
         <div class="collapse navbar-collapse" id="nav-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="${pageContext.request.contextPath}/login.jsp">首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/login.jsp">登录</a></li>
-                <li><a href="${pageContext.request.contextPath}/admin_login.jsp">管理员入口</a></li>
+                <li><a href="${pageContext.request.contextPath}/login.jsp">首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/login.jsp">学生登录</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/admin_login.jsp">管理员入口</a></li>
             </ul>
         </div>
     </div>
@@ -36,17 +36,18 @@
             <h2><i class="fa fa-graduation-cap"></i> 导师推荐系统</h2>
             <p class="slogan">智能匹配 · 精准推荐 · 成就未来</p>
             <ul class="features">
-                <li><i class="fa fa-check-circle"></i> 协同过滤智能推荐算法</li>
-                <li><i class="fa fa-check-circle"></i> 多维度导师信息浏览</li>
-                <li><i class="fa fa-check-circle"></i> 个性化意向导师选择</li>
+                <li><i class="fa fa-check-circle"></i> 导师信息综合管理</li>
+                <li><i class="fa fa-check-circle"></i> 扩展信息配置维护</li>
+                <li><i class="fa fa-check-circle"></i> 系统数据全局掌控</li>
             </ul>
         </div>
         <div class="login-card">
-            <div class="card-title"><i class="fa fa-user"></i> 学生登录</div>
+            <div class="card-title"><i class="fa fa-shield"></i> 管理员登录</div>
             <form method="post" action="${pageContext.request.contextPath}/login" id="loginForm">
+                <input type="hidden" name="redirect" value="admin">
                 <div class="form-group">
-                    <label>用户名（学生姓名）</label>
-                    <input class="form-control" type="text" name="username" placeholder="请输入姓名" required>
+                    <label>管理员账号（姓名）</label>
+                    <input class="form-control" type="text" name="username" placeholder="请输入管理员姓名" required>
                 </div>
                 <div class="form-group">
                     <label>密码</label>
@@ -54,7 +55,7 @@
                 </div>
                 <button type="submit" class="btn-login">登 录</button>
             </form>
-            <p class="register-link">还没有账号？<a href="${pageContext.request.contextPath}/index.jsp">立即注册 <i class="fa fa-arrow-right"></i></a></p>
+            <p class="register-link"><a href="${pageContext.request.contextPath}/login.jsp"><i class="fa fa-arrow-left"></i> 返回学生登录</a></p>
             <%
                 String error = (String) request.getAttribute("error");
                 if (error != null) {

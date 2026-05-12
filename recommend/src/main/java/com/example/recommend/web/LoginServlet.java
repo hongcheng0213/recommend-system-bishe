@@ -27,17 +27,32 @@ public class LoginServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        String redirect = req.getParameter("redirect");
 
         Student student = studentDAO.findByName(username);
         if (student != null && BCrypt.checkpw(password, student.getPasswordHash())) {
+            // Admin login: must be an admin
+            if ("admin".equals(redirect) && !student.isAdmin()) {
+                req.setAttribute("error", "该账号没有管理员权限");
+                req.getRequestDispatcher("/admin_login.jsp").forward(req, resp);
+                return;
+            }
             HttpSession session = req.getSession();
             session.setAttribute("studentId", student.getId());
             session.setAttribute("studentName", student.getName());
             session.setAttribute("isAdmin", student.isAdmin());
-            resp.sendRedirect(req.getContextPath() + "/student/home");
+            if ("admin".equals(redirect)) {
+                resp.sendRedirect(req.getContextPath() + "/admin");
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/student/home");
+            }
         } else {
             req.setAttribute("error", "用户名或密码错误");
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            if ("admin".equals(redirect)) {
+                req.getRequestDispatcher("/admin_login.jsp").forward(req, resp);
+            } else {
+                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            }
         }
     }
 }
