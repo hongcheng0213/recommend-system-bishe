@@ -11,7 +11,6 @@ public class Tutor {
     private String title;
     private String researchAchievement;
     private int studentQuota;
-    private int hotScore;
     private String photo;
     private String homepageUrl;
 
@@ -87,14 +86,6 @@ public class Tutor {
         this.studentQuota = studentQuota;
     }
 
-    public int getHotScore() {
-        return hotScore;
-    }
-
-    public void setHotScore(int hotScore) {
-        this.hotScore = hotScore;
-    }
-
     public String getUniversity() {
         return university;
     }
@@ -119,4 +110,3 @@ public class Tutor {
         this.homepageUrl = homepageUrl;
     }
 }
-
