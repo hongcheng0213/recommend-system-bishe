@@ -151,7 +151,7 @@ public class TutorDAO {
             ps.setString(3, t.getUniversity());
             ps.setString(4, t.getDepartment());
             ps.setString(5, t.getResearchFields());
-            if (t.getQuota() > 0) ps.setInt(6, t.getQuota()); else ps.setNull(6, Types.INTEGER);
+            if (t.getQuota() != null && t.getQuota() > 0) ps.setInt(6, t.getQuota()); else ps.setNull(6, Types.INTEGER);
             ps.setString(7, t.getPhoto());
             ps.setString(8, t.getHomepageUrl());
             ps.executeUpdate();
@@ -173,7 +173,7 @@ public class TutorDAO {
             ps.setString(3, t.getUniversity());
             ps.setString(4, t.getDepartment());
             ps.setString(5, t.getResearchFields());
-            if (t.getQuota() > 0) ps.setInt(6, t.getQuota()); else ps.setNull(6, Types.INTEGER);
+            if (t.getQuota() != null && t.getQuota() > 0) ps.setInt(6, t.getQuota()); else ps.setNull(6, Types.INTEGER);
             ps.setString(7, t.getPhoto());
             ps.setString(8, t.getHomepageUrl());
             ps.setInt(9, t.getId());
@@ -192,7 +192,8 @@ public class TutorDAO {
         t.setUniversity(rs.getString("university"));
         t.setDepartment(rs.getString("department"));
         t.setResearchFields(rs.getString("research_fields"));
-        t.setQuota(rs.getInt("quota"));
+        int q = rs.getInt("quota");
+        t.setQuota(rs.wasNull() ? null : q);
         t.setTitle(rs.getString("title"));
         t.setResearchAchievement(rs.getString("research_achievement"));
         t.setStudentQuota(rs.getInt("student_quota"));

@@ -7,7 +7,7 @@ public class Tutor {
     private String university;
     private String department;
     private String researchFields;
-    private int quota;
+    private Integer quota;
     private String title;
     private String researchAchievement;
     private int studentQuota;
@@ -54,11 +54,11 @@ public class Tutor {
         this.researchFields = researchFields;
     }
 
-    public int getQuota() {
+    public Integer getQuota() {
         return quota;
     }
 
-    public void setQuota(int quota) {
+    public void setQuota(Integer quota) {
         this.quota = quota;
     }
 

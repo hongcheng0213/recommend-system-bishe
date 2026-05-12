@@ -71,7 +71,7 @@
                                 <td><%= t.getUniversity() != null ? t.getUniversity() : "-" %></td>
                                 <td><%= t.getDepartment() != null ? t.getDepartment() : "-" %></td>
                                 <td><%= t.getResearchFields() != null ? t.getResearchFields() : "-" %></td>
-                                <td><%= t.getQuota() %></td>
+                                <td><%= t.getQuota() != null && t.getQuota() > 0 ? t.getQuota() : "-" %></td>
                                 <td>
                                     <select name="score_<%= t.getId() %>" class="form-control input-sm" style="width:90px; display:inline-block;">
                                         <option value="">未评分</option>
@@ -85,19 +85,32 @@
                         </tbody>
                     </table>
                 </div>
-                <button type="submit" class="btn btn-success">保存所有评分</button>
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <div id="pageInfo" class="text-muted" style="padding-top:8px;"></div>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <button type="submit" class="btn btn-success">保存所有评分</button>
+                        <a class="btn btn-success" href="${pageContext.request.contextPath}/student/recommend">查看推荐结果</a>
+                    </div>
+                </div>
+                <div class="text-center"><ul class="pagination" id="pagination"></ul></div>
             </form>
         <% } %>
     </div></div>
-    <div class="text-right"><a class="btn btn-success" href="${pageContext.request.contextPath}/student/recommend">查看推荐结果</a></div>
 </div>
 <footer class="footer text-center">本科生-研究生导师推荐系统</footer>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
 <script>
+var PAGE_SIZE = 10;
 var originalRows = [];
+var allRows = [];
+
 $(function(){
     originalRows = $('#tutorTable tbody tr').toArray();
+    allRows = originalRows.slice();
+    showPage(1);
 });
 
 function charMatch(keyword, text) {
@@ -108,19 +121,17 @@ function charMatch(keyword, text) {
     return qi === keyword.length;
 }
 
-// Score a single token against a row's search text
-// 3=exact field match, 2=field starts with, 1=contains, 0=subsequence, -1=no match
 function tokenScore(keyword, text) {
     var fields = text.split(' ');
     var best = -1;
     for (var f = 0; f < fields.length; f++) {
         var pos = fields[f].indexOf(keyword);
         if (pos === 0 && fields[f].length === keyword.length) {
-            best = Math.max(best, 3); // exact field match
+            best = Math.max(best, 3);
         } else if (pos === 0) {
-            best = Math.max(best, 2); // field starts with keyword
+            best = Math.max(best, 2);
         } else if (pos > 0) {
-            best = Math.max(best, 1); // field contains keyword
+            best = Math.max(best, 1);
         }
     }
     if (best >= 0) return best;
@@ -129,36 +140,62 @@ function tokenScore(keyword, text) {
 
 function filterTutors() {
     var keyword = $.trim($('#searchBox').val()).toLowerCase();
-    var rows = $('#tutorTable tbody tr').toArray();
-    if (!keyword) {
-        var tbody = $('#tutorTable tbody');
-        for (var i = 0; i < originalRows.length; i++) {
-            tbody.append(originalRows[i]);
+    var rows = originalRows.slice();
+    if (keyword) {
+        var tokens = keyword.split(/\s+/);
+        var scored = [];
+        for (var i = 0; i < rows.length; i++) {
+            var text = $(rows[i]).data('search').toLowerCase();
+            var total = 0;
+            for (var t = 0; t < tokens.length; t++) {
+                var s = tokenScore(tokens[t], text);
+                if (s >= 0) total += s;
+            }
+            scored.push({row: rows[i], score: total, orig: i});
         }
-        return;
-    }
-    // Split by spaces into tokens; rank by match count (most tokens matched = top)
-    var tokens = keyword.split(/\s+/);
-    var scored = [];
-    for (var i = 0; i < rows.length; i++) {
-        var text = $(rows[i]).data('search').toLowerCase();
-        var total = 0;
-        for (var t = 0; t < tokens.length; t++) {
-            var s = tokenScore(tokens[t], text);
-            if (s >= 0) total += s;
+        scored.sort(function(a, b) {
+            if (a.score !== b.score) return b.score - a.score;
+            return a.orig - b.orig;
+        });
+        allRows = [];
+        for (var j = 0; j < scored.length; j++) {
+            allRows.push(scored[j].row);
         }
-        scored.push({row: rows[i], score: total, orig: i});
+    } else {
+        allRows = rows;
     }
-    scored.sort(function(a, b) {
-        if (a.score !== b.score) return b.score - a.score;
-        return a.orig - b.orig;
-    });
+    showPage(1);
+}
+
+function showPage(page) {
+    var total = allRows.length;
+    var totalPages = Math.ceil(total / PAGE_SIZE);
+    if (totalPages < 1) totalPages = 1;
+    if (page < 1) page = 1;
+    if (page > totalPages) page = totalPages;
+
     var tbody = $('#tutorTable tbody');
-    for (var j = 0; j < scored.length; j++) {
-        tbody.append(scored[j].row);
+    tbody.empty();
+    var start = (page - 1) * PAGE_SIZE;
+    var end = Math.min(start + PAGE_SIZE, total);
+    for (var i = start; i < end; i++) {
+        tbody.append(allRows[i]);
     }
+
+    $('#pageInfo').text('共 ' + total + ' 位导师，第 ' + page + '/' + totalPages + ' 页');
+    var html = '';
+    html += '<li class="' + (page <= 1 ? 'disabled' : '') + '"><a href="#" onclick="goPage(' + (page - 1) + ');return false;">&laquo;</a></li>';
+    for (var p = 1; p <= totalPages; p++) {
+        html += '<li class="' + (p === page ? 'active' : '') + '"><a href="#" onclick="goPage(' + p + ');return false;">' + p + '</a></li>';
+    }
+    html += '<li class="' + (page >= totalPages ? 'disabled' : '') + '"><a href="#" onclick="goPage(' + (page + 1) + ');return false;">&raquo;</a></li>';
+    $('#pagination').html(html);
+}
+
+function goPage(p) {
+    showPage(p);
+    $('html, body').animate({scrollTop: $('#tutorTable').offset().top - 80}, 200);
 }
 </script>
 </body>
 </html>
-

@@ -115,7 +115,7 @@
                                         data-university="<%= escapeAttr(t.getUniversity()) %>"
                                         data-department="<%= escapeAttr(t.getDepartment()) %>"
                                         data-fields="<%= escapeAttr(t.getResearchFields()) %>"
-                                        data-quota="<%= t.getQuota() %>"
+                                        data-quota="<%= t.getQuota() != null ? t.getQuota() : "" %>"
                                         data-photo="<%= escapeAttr(t.getPhoto()) %>"
                                         data-homepage="<%= escapeAttr(t.getHomepageUrl()) %>"
                                     ><%= t.getName() %> [<%= t.getDepartment() != null ? t.getDepartment() : "" %>]</option>
@@ -197,7 +197,7 @@
                             <td><%= t.getDepartment() != null ? t.getDepartment() : "-" %></td>
                             <td><%= t.getUniversity() != null ? t.getUniversity() : "-" %></td>
                             <td><%= t.getTitle() != null ? t.getTitle() : "-" %></td>
-                            <td><%= t.getStudentQuota() > 0 ? t.getStudentQuota() : t.getQuota() %></td>
+                            <td><%= t.getStudentQuota() > 0 ? t.getStudentQuota() : (t.getQuota() != null && t.getQuota() > 0 ? t.getQuota() : "-") %></td>
                             <td>
                                 <% if (t.getPhoto() != null && !t.getPhoto().isEmpty()) { %>
                                     <a href="<%= t.getPhoto() %>" target="_blank" rel="noopener noreferrer">查看</a>
