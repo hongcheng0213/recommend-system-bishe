@@ -100,11 +100,18 @@ $(function(){
     originalRows = $('#tutorTable tbody tr').toArray();
 });
 
+function charMatch(query, text) {
+    var qi = 0;
+    for (var ti = 0; ti < text.length && qi < query.length; ti++) {
+        if (text.charAt(ti) === query.charAt(qi)) qi++;
+    }
+    return qi === query.length;
+}
+
 function filterTutors() {
     var keyword = $.trim($('#searchBox').val()).toLowerCase();
     var rows = $('#tutorTable tbody tr').toArray();
     if (!keyword) {
-        // Restore original order
         var tbody = $('#tutorTable tbody');
         for (var i = 0; i < originalRows.length; i++) {
             tbody.append(originalRows[i]);
@@ -114,7 +121,7 @@ function filterTutors() {
     var matched = [], unmatched = [];
     for (var i = 0; i < rows.length; i++) {
         var text = $(rows[i]).data('search').toLowerCase();
-        if (text.indexOf(keyword) !== -1) {
+        if (charMatch(keyword, text)) {
             matched.push(rows[i]);
         } else {
             unmatched.push(rows[i]);
