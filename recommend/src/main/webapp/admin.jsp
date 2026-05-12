@@ -8,6 +8,12 @@
         return;
     }
 %>
+<%!
+    private String escapeAttr(String val) {
+        if (val == null) return "";
+        return val.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,7 +99,7 @@
                     </button>
                 </div>
                 <div class="panel-body">
-                    <form method="post" action="${pageContext.request.contextPath}/admin" onsubmit="return checkPhoto()">
+                    <form method="post" action="${pageContext.request.contextPath}/admin">
                         <input type="hidden" name="action" value="saveBasic">
                         <input type="hidden" name="tutorId" id="basicTutorId">
                         <div class="form-group">
@@ -104,14 +110,14 @@
                                     for (Tutor t : tutors) {
                                 %>
                                     <option value="<%= t.getId() %>"
-                                        data-name="<%= t.getName() != null ? t.getName().replace("\"", "&quot;") : "" %>"
-                                        data-gender="<%= t.getGender() != null ? t.getGender() : "" %>"
-                                        data-university="<%= t.getUniversity() != null ? t.getUniversity() : "" %>"
-                                        data-department="<%= t.getDepartment() != null ? t.getDepartment() : "" %>"
-                                        data-fields="<%= t.getResearchFields() != null ? t.getResearchFields().replace("\"", "&quot;") : "" %>"
+                                        data-name="<%= escapeAttr(t.getName()) %>"
+                                        data-gender="<%= escapeAttr(t.getGender()) %>"
+                                        data-university="<%= escapeAttr(t.getUniversity()) %>"
+                                        data-department="<%= escapeAttr(t.getDepartment()) %>"
+                                        data-fields="<%= escapeAttr(t.getResearchFields()) %>"
                                         data-quota="<%= t.getQuota() %>"
-                                        data-photo="<%= t.getPhoto() != null ? t.getPhoto().replace("\"", "&quot;") : "" %>"
-                                        data-homepage="<%= t.getHomepageUrl() != null ? t.getHomepageUrl().replace("\"", "&quot;") : "" %>"
+                                        data-photo="<%= escapeAttr(t.getPhoto()) %>"
+                                        data-homepage="<%= escapeAttr(t.getHomepageUrl()) %>"
                                     ><%= t.getName() %> [<%= t.getDepartment() != null ? t.getDepartment() : "" %>]</option>
                                 <% }} %>
                             </select>
@@ -157,8 +163,8 @@
                                 for (Tutor t : tutors) {
                             %>
                                 <option value="<%= t.getId() %>"
-                                    data-title="<%= t.getTitle() != null ? t.getTitle().replace("\"", "&quot;") : "" %>"
-                                    data-achievement="<%= t.getResearchAchievement() != null ? t.getResearchAchievement().replace("\"", "&quot;") : "" %>"
+                                    data-title="<%= escapeAttr(t.getTitle()) %>"
+                                    data-achievement="<%= escapeAttr(t.getResearchAchievement()) %>"
                                     data-quota="<%= t.getStudentQuota() %>"
                                 ><%= t.getName() %> [<%= t.getDepartment() != null ? t.getDepartment() : "" %>]</option>
                             <% }} %>
@@ -194,12 +200,12 @@
                             <td><%= t.getStudentQuota() > 0 ? t.getStudentQuota() : t.getQuota() %></td>
                             <td>
                                 <% if (t.getPhoto() != null && !t.getPhoto().isEmpty()) { %>
-                                    <a href="<%= t.getPhoto() %>" target="_blank">查看</a>
+                                    <a href="<%= t.getPhoto() %>" target="_blank" rel="noopener noreferrer">查看</a>
                                 <% } else { %>-<% } %>
                             </td>
                             <td>
                                 <% if (t.getHomepageUrl() != null && !t.getHomepageUrl().isEmpty()) { %>
-                                    <a href="<%= t.getHomepageUrl() %>" target="_blank"><i class="fa fa-external-link"></i></a>
+                                    <a href="<%= t.getHomepageUrl() %>" target="_blank" rel="noopener noreferrer"><i class="fa fa-external-link"></i></a>
                                 <% } else { %>-<% } %>
                             </td>
                         </tr>
@@ -257,11 +263,6 @@
         } else {
             $('#photoPreviewWrap').hide();
         }
-    }
-
-    function checkPhoto() {
-        previewPhoto();
-        return true;
     }
 
     function loadExtInfo(val) {

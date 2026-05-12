@@ -68,6 +68,19 @@ public class AdminServlet extends HttpServlet {
             try { t.setQuota(Integer.parseInt(quotaStr.trim())); } catch (Exception ignored) {}
         }
 
+        if (t.getPhoto() != null && !t.getPhoto().isEmpty() &&
+            !t.getPhoto().startsWith("http://") && !t.getPhoto().startsWith("https://")) {
+            req.setAttribute("error", "照片URL必须以 http:// 或 https:// 开头");
+            doGet(req, resp);
+            return;
+        }
+        if (t.getHomepageUrl() != null && !t.getHomepageUrl().isEmpty() &&
+            !t.getHomepageUrl().startsWith("http://") && !t.getHomepageUrl().startsWith("https://")) {
+            req.setAttribute("error", "主页URL必须以 http:// 或 https:// 开头");
+            doGet(req, resp);
+            return;
+        }
+
         int tutorId = 0;
         if (tutorIdStr != null && !tutorIdStr.trim().isEmpty()) {
             try { tutorId = Integer.parseInt(tutorIdStr.trim()); } catch (Exception ignored) {}
