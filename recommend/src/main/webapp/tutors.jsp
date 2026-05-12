@@ -108,6 +108,25 @@ function charMatch(keyword, text) {
     return qi === keyword.length;
 }
 
+// Score a single token against a row's search text
+// 3=exact field match, 2=field starts with, 1=contains, 0=subsequence, -1=no match
+function tokenScore(keyword, text) {
+    var fields = text.split(' ');
+    var best = -1;
+    for (var f = 0; f < fields.length; f++) {
+        var pos = fields[f].indexOf(keyword);
+        if (pos === 0 && fields[f].length === keyword.length) {
+            best = Math.max(best, 3); // exact field match
+        } else if (pos === 0) {
+            best = Math.max(best, 2); // field starts with keyword
+        } else if (pos > 0) {
+            best = Math.max(best, 1); // field contains keyword
+        }
+    }
+    if (best >= 0) return best;
+    return charMatch(keyword, text) ? 0 : -1;
+}
+
 function filterTutors() {
     var keyword = $.trim($('#searchBox').val()).toLowerCase();
     var rows = $('#tutorTable tbody tr').toArray();
@@ -123,11 +142,12 @@ function filterTutors() {
     var scored = [];
     for (var i = 0; i < rows.length; i++) {
         var text = $(rows[i]).data('search').toLowerCase();
-        var cnt = 0;
+        var total = 0;
         for (var t = 0; t < tokens.length; t++) {
-            if (charMatch(tokens[t], text)) cnt++;
+            var s = tokenScore(tokens[t], text);
+            if (s >= 0) total += s;
         }
-        scored.push({row: rows[i], score: cnt, orig: i});
+        scored.push({row: rows[i], score: total, orig: i});
     }
     scored.sort(function(a, b) {
         if (a.score !== b.score) return b.score - a.score;
