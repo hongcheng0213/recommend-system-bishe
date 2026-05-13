@@ -59,7 +59,9 @@
       "mcp__plugin_playwright_playwright__browser_run_code_unsafe",
       "Bash(npm i *)",
       "Bash(C:\\\\Users\\\\张红程\\\\.claude\\\\plugins\\\\cache\\\\claude-plugins-official\\\\superpowers\\\\5.1.0\\\\skills\\\\brainstorming\\\\scripts\\\\start-server.sh *)",
-      "Bash(\"C:\\\\Users\\\\张红程\\\\.claude\\\\plugins\\\\cache\\\\claude-plugins-official\\\\superpowers\\\\5.1.0\\\\skills\\\\brainstorming\\\\scripts\\\\stop-server.sh\" \"D:\\\\\\\\yydownload\\\\\\\\testcode_file\\\\\\\\AIcode\\\\\\\\version2\\\\\\\\.superpowers\\\\\\\\brainstorm\\\\\\\\2033-1778553748\")"
+      "Bash(\"C:\\\\Users\\\\张红程\\\\.claude\\\\plugins\\\\cache\\\\claude-plugins-official\\\\superpowers\\\\5.1.0\\\\skills\\\\brainstorming\\\\scripts\\\\stop-server.sh\" \"D:\\\\\\\\yydownload\\\\\\\\testcode_file\\\\\\\\AIcode\\\\\\\\version2\\\\\\\\.superpowers\\\\\\\\brainstorm\\\\\\\\2033-1778553748\")",
+      "WebFetch(domain:www.cs.tsinghua.edu.cn)",
+      "WebSearch"
     ]
   },
   "enableAllProjectMcpServers": true,
